@@ -3,6 +3,7 @@
 
 int main(void)
 {
+    printf("I like trains");
     return EXIT_SUCCESS;
 }
 
