@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "SumTest.h"
+const int AMOUNT_OF_TRAINS = 10;
+enum Status {Off = 1, OnRoute, Down};
+
+typedef struct Train
+{
+    double Velocity;
+    int X;
+    int Y;
+    int Status;
+} Train;
 
 int main(void)
 {
