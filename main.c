@@ -6,9 +6,9 @@ enum Status {Off = 1, OnRoute, Down};
 typedef struct Train
 {
     double Velocity;
-    int X;
-    int Y;
     int Status;
+    double Latitude;
+    double Longitude;
 } Train;
 
 int main(void)
