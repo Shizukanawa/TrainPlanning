@@ -11,6 +11,7 @@ typedef struct Train
     double Longitude;
 } Train;
 
+
 int main(void)
 {
     int i = 0, j;
