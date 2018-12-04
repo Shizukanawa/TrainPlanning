@@ -13,7 +13,7 @@ typedef struct Train
 
 int main(void)
 {
-    int i = 0;
+    int i = 0, j;
     printf("I like trains");
     i = Sum(5, 2);
     printf("%d\n", i);
