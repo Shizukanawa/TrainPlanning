@@ -18,7 +18,6 @@ typedef struct Train
 
 int main(void)
 {
-    int i = 0;
     
 
     return EXIT_SUCCESS;
