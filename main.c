@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 const int AMOUNT_OF_TRAINS = 10;
-
-enum Status {Off, OnRoute, Down};
+enum Status
+{
+    Off = 1,
+    Enroute,
+    Down
+};
 
 typedef struct Train
 {
