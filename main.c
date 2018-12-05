@@ -35,7 +35,7 @@ enum Station
     Roskilde,
     Høje_Taastrup,
     Valby,
-    København
+    Koebenhavn
 };
 
 enum Status
