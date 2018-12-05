@@ -1,3 +1,5 @@
+/* Point1: 57.043243, 9.917183 */
+/* Point2: 57.008360, 9.898382 */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -51,7 +53,7 @@ typedef struct Train
 
 Train changeStatus(Train train, int status);
 Train moveTrain(Train *train, int station);
-double calculateDistance(double latitude1, longitude1, double latitude2, double longitude2)
+double calculateDistance(double lat1, long1, double lat2, double long2);
 
 int main(void)
 {
@@ -85,7 +87,7 @@ Train moveTrain(Train *train, int station)
     }
 }
 
-double calculateDistance(double latitude1, longitude1, double latitude2, double longitude2)
+double calculateDistance(double lat1, long1, double lat2, double long2)
 {
 
 }
