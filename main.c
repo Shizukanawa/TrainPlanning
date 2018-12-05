@@ -71,7 +71,7 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-    printf("Result: %lf\n", calculateDistance(57.043243, 9.917183, 57.008360, 9.898382));
+    printf("Result: %lf\n", calculateDistance(57.043243, 9.917183, 57.008360, 9.898382)/1000);
     return EXIT_SUCCESS;
 }
 
