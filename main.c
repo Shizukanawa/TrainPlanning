@@ -12,14 +12,14 @@ enum Station
     Aalborg = 0,
     Skalborg,
     Svenstrup,
-    Støvring,
-    Skørping,
+    Stoevring,
+    Skoerping,
     Arden,
     Hobro,
     Randers,
-    Langå,
+    Langaa,
     Hadsten,
-    Århus,
+    Aarhus,
     Skanderborg,
     Horsens,
     Vejle,
@@ -28,14 +28,14 @@ enum Station
     Odense,
     Langeskov,
     Nyborg,
-    Korsør,
+    Korsoer,
     Slagelse,
-    Sorø,
+    Soroe,
     Ringsted,
     Roskilde,
-    Høje_Taastrup,
+    Hoeje_Taastrup,
     Valby,
-    København
+    Koebenhavn
 };
 
 enum Status
