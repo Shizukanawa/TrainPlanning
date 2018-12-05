@@ -40,4 +40,3 @@ Train changeStatus(Train train, int status)
     train.Status = status;
     return train;
 }
-
