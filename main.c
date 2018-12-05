@@ -92,7 +92,7 @@ Train moveTrain(Train *train, int station)
 
 double calculateDistance(double lat1, double long1, double lat2, double long2)
 {
-    double R = 6371000, Phi, Lambda; /* Formular from https://www.movable-type.co.uk/scripts/latlong.html */
+    double R = 6371000, Phi1, Phi2, DeltaPhi, DeltaLambda; /* Formular from https://www.movable-type.co.uk/scripts/latlong.html */
     
 }
 
