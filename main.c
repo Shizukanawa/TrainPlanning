@@ -53,7 +53,7 @@ typedef struct Train
 
 Train changeStatus(Train train, int status);
 Train moveTrain(Train *train, int station);
-double calculateDistance(double lat1, long1, double lat2, double long2);
+double calculateDistance(double lat1, double long1, double lat2, double long2);
 
 int main(void)
 {
@@ -87,7 +87,7 @@ Train moveTrain(Train *train, int station)
     }
 }
 
-double calculateDistance(double lat1, long1, double lat2, double long2)
+double calculateDistance(double lat1, double long1, double lat2, double long2)
 {
     int i;
 }
