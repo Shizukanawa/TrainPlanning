@@ -46,6 +46,7 @@ typedef struct Train
 {
     double Velocity;
     int Status;
+    int Station;
 } Train;
 
 Train changeStatus(Train train, int status);
