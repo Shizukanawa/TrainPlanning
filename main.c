@@ -6,7 +6,7 @@ const int AMOUNT_OF_TRAINS = 10;
 
 enum Status
 {
-    Off = 1,
+    Off,
     Enroute,
     Down
 };
@@ -35,7 +35,6 @@ int main(void)
 
 Train changeStatus(Train train, int status)
 {
-    printf("%d\n", status);
     train.Status = status;
     return train;
 }
