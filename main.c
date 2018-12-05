@@ -79,13 +79,3 @@ Train changeStatus(Train train, int status)
     train.Status = status;
     return train;
 }
-
-Train moveTrain(Train *train, int station)
-{
-    int i, j;
-    for(i = 0; i < AMOUNT_OF_TRAINS; i++){
-        if (train[i].Status !=  Off || Down){
-
-        }
-    }
-}
