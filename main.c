@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#define AMOUNT_OF_STATIONS 27
+const int AMOUNT_OF_STATIONS = 27;
 const int AMOUNT_OF_TRAINS = 10;
+
 enum Status
 {
     Off,
@@ -35,3 +39,4 @@ Train changeStatus(Train train, int status)
     train.Status = status;
     return train;
 }
+
