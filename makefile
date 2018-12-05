@@ -1,6 +1,6 @@
 CC = gcc
 
-main.exe: main.c SumTest.o
+main.exe: main.c
 	$(CC) -o main main.c
 
 clean:
