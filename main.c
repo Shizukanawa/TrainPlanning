@@ -32,6 +32,7 @@ int main(void)
 
 Train changeStatus(Train train, int status)
 {
+    printf("%d\n", status);
     train.Status = status;
     return train;
 }
