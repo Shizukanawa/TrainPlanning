@@ -46,7 +46,6 @@ typedef struct Train
 {
     double Velocity;
     int Status;
-    int Station;
 } Train;
 
 Train changeStatus(Train train, int status);
@@ -72,3 +71,5 @@ Train changeStatus(Train train, int status)
     train.Status = status;
     return train;
 }
+
+double calculateDistance(double )
