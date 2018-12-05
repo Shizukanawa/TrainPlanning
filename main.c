@@ -30,7 +30,7 @@ int main(void)
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     
-    changeStatus(IC4[0], Down);
+    IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     return EXIT_SUCCESS;
 }
