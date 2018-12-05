@@ -89,5 +89,5 @@ Train moveTrain(Train *train, int station)
 
 double calculateDistance(double lat1, long1, double lat2, double long2)
 {
-
+    int i;
 }
