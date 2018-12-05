@@ -46,6 +46,7 @@ typedef struct Train
 {
     double Velocity;
     int Status;
+    int Stations;
 } Train;
 
 Train moveTrain(Train *train, int station);
