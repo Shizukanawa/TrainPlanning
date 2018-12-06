@@ -54,6 +54,7 @@ typedef struct Train
 
 Train changeStatus(Train train, int status);
 Train moveTrain(Train *train, int station);
+char *nameOfStation(int station);
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -74,6 +75,7 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
+    printf("%s", nameOfStation(0));
     return EXIT_SUCCESS;
 }
 
@@ -81,4 +83,36 @@ Train changeStatus(Train train, int status)
 {
     train.Status = status;
     return train;
+}
+
+char *nameOfStation(int station)
+{
+    static char *station_array[AMOUNT_OF_STATIONS] = {"Aalborg",
+                                                      "Skalborg",
+                                                      "Svenstrup",
+                                                      "Stoevring",
+                                                      "Skoerping",
+                                                      "Arden",
+                                                      "Hobro",
+                                                      "Randers",
+                                                      "Langaa",
+                                                      "Hadsten",
+                                                      "Aarhus",
+                                                      "Skanderborg",
+                                                      "Horsens",
+                                                      "Vejle",
+                                                      "Fredericia",
+                                                      "Middelfart",
+                                                      "Odense",
+                                                      "Langeskov",
+                                                      "Nyborg",
+                                                      "Korsoer",
+                                                      "Slagelse",
+                                                      "Soroe",
+                                                      "Ringsted",
+                                                      "Roskilde",
+                                                      "Hoeje_Taastrup",
+                                                      "Valby",
+                                                      "Koebenhavn"};
+    return station_array[station];
 }
