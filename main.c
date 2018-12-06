@@ -74,7 +74,6 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-    printf("%s", nameOfStation(15));
     return EXIT_SUCCESS;
 }
 
@@ -86,9 +85,9 @@ Train changeStatus(Train train, int status)
 
 char *nameOfStation(int station)
 {
-    static char *station_array[] = {"Aalborg",
     static char *station_array[] = {"Aalborg", "Skalborg", "Svenstrup", "Stoevring", "Skoerping", "Arden", "Hobro",
                                     "Randers", "Langaa", "Hadsten", "Aarhus", "Skanderborg", "Horsens", "Vejle",
                                     "Fredericia", "Middelfart", "Odense", "Langeskov", "Nyborg", "Korsoer", "Slagelse",
-                                    "Soroe", "Ringsted", "Roskilde", "Hoeje_Taastrup", "Valby", "Koebenhavn"};
+                                    "Soroe", "Ringsted", "Roskilde", "Hoeje Taastrup", "Valby", "Koebenhavn"};
+    return station_array[station];
 }
