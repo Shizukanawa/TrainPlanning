@@ -52,7 +52,6 @@ typedef struct Train
 } Train;
 
 Train changeStatus(Train train, int status);
-Train moveTrain(Train *train, int station);
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
