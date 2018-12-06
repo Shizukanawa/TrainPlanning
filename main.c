@@ -53,6 +53,7 @@ typedef struct Train
 } Train;
 
 Train changeStatus(Train train, int status);
+char *nameOfStation(int station);
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -80,4 +81,13 @@ Train changeStatus(Train train, int status)
 {
     train.Status = status;
     return train;
+}
+
+char *nameOfStation(int station)
+{
+    static char *station_array[] = {"Aalborg", "Skalborg", "Svenstrup", "Stoevring", "Skoerping", "Arden", "Hobro",
+                                    "Randers", "Langaa", "Hadsten", "Aarhus", "Skanderborg", "Horsens", "Vejle",
+                                    "Fredericia", "Middelfart", "Odense", "Langeskov", "Nyborg", "Korsoer", "Slagelse",
+                                    "Soroe", "Ringsted", "Roskilde", "Hoeje Taastrup", "Valby", "Koebenhavn"};
+    return station_array[station];
 }
