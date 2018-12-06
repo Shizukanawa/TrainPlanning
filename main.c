@@ -87,31 +87,8 @@ Train changeStatus(Train train, int status)
 char *nameOfStation(int station)
 {
     static char *station_array[] = {"Aalborg",
-                                    "Skalborg",
-                                    "Svenstrup",
-                                    "Stoevring",
-                                    "Skoerping",
-                                    "Arden",
-                                    "Hobro",
-                                    "Randers",
-                                    "Langaa",
-                                    "Hadsten",
-                                    "Aarhus",
-                                    "Skanderborg",
-                                    "Horsens",
-                                    "Vejle",
-                                    "Fredericia",
-                                    "Middelfart",
-                                    "Odense",
-                                    "Langeskov",
-                                    "Nyborg",
-                                    "Korsoer",
-                                    "Slagelse",
-                                    "Soroe",
-                                    "Ringsted",
-                                    "Roskilde",
-                                    "Hoeje_Taastrup",
-                                    "Valby",
-                                    "Koebenhavn"};
-    return station_array[station];
+    static char *station_array[] = {"Aalborg", "Skalborg", "Svenstrup", "Stoevring", "Skoerping", "Arden", "Hobro",
+                                    "Randers", "Langaa", "Hadsten", "Aarhus", "Skanderborg", "Horsens", "Vejle",
+                                    "Fredericia", "Middelfart", "Odense", "Langeskov", "Nyborg", "Korsoer", "Slagelse",
+                                    "Soroe", "Ringsted", "Roskilde", "Hoeje_Taastrup", "Valby", "Koebenhavn"};
 }
