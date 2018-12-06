@@ -40,6 +40,7 @@ enum Station
 enum Status
 {
     Off,
+    Onstation,
     Enroute,
     Down
 };
