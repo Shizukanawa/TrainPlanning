@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
+#define a "station"
+#define b "tog nr"
+#define c "tid"
 
 const int AMOUNT_OF_STATIONS = 27;
 const int AMOUNT_OF_TRAINS = 10;
+const int MAX_LGT = 20;
 
 enum Station
 {
@@ -54,6 +58,7 @@ typedef struct Train
 
 Train changeStatus(Train train, int status);
 char *nameOfStation(int station);
+void print_table();
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -74,6 +79,9 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
+
+    printf("priting table\n");
+    print_table();
     return EXIT_SUCCESS;
 }
 
@@ -90,4 +98,13 @@ char *nameOfStation(int station)
                                     "Fredericia", "Middelfart", "Odense", "Langeskov", "Nyborg", "Korsoer", "Slagelse",
                                     "Soroe", "Ringsted", "Roskilde", "Hoeje Taastrup", "Valby", "Koebenhavn"};
     return station_array[station];
+}
+void print_table(){
+    printf("tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a);
+    for(int i = 0; i<27;i++){
+       printf("%-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n",b,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c);
+    }
+
+
+
 }
