@@ -56,7 +56,6 @@ typedef struct Stations
     double Longitude;
 } Stations;
 
-
 typedef struct Train
 {
     double Velocity;
@@ -67,7 +66,7 @@ typedef struct Train
 Train changeStatus(Train train, int status);
 char *nameOfStation(int station);
 void getStations(Stations *s);
-void printTop();
+void printTop(Stations *s);
 void printTable();
 
 /* Point1: 57.043243, 9.917183 */
@@ -113,9 +112,14 @@ char *nameOfStation(int station)
     return station_array[station];
 }
 
-void printTop()
+void printTop(Stations *s)
 {
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n");
+    int i;
+    printf("Tog nr: %-5s", s[0].StationName);
+    for (i = 0; i < AMOUNT_OF_STATIONS; i++)
+    {
+        printf(" %-5s", s[i].StationName);
+    }
 }
 
 void printTable()
@@ -123,20 +127,21 @@ void printTable()
     printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
 
-void getStations(Stations *s){
+void getStations(Stations *s)
+{
     int i;
     FILE *fp;
     fp = fopen("Stationer.txt", "r");
     if (fp == NULL)
-    printf("Stationer.txt not found\n");
+        printf("Stationer.txt not found\n");
     else
     {
         for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
         {
-        fscanf(fp, "%s %lf %lf\n",
-            s[i].StationName,
-            &s[i].Latitude,
-            &s[i].Longitude);
+            fscanf(fp, "%s %lf %lf\n",
+                   s[i].StationName,
+                   &s[i].Latitude,
+                   &s[i].Longitude);
         }
         fclose(fp);
     }
