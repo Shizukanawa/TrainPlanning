@@ -74,7 +74,6 @@ void printTable();
 
 int main(void)
 {
-
     Train IC4[AMOUNT_OF_TRAINS];
     
     int i, j = 0;
@@ -123,10 +122,7 @@ void printTop(Stations *s)
 
 void printTable()
 {
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
-=======
     printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 }
 
 void getStations(Stations *s)
@@ -147,7 +143,6 @@ void getStations(Stations *s)
         }
         fclose(fp);
     }
-<<<<<<< HEAD
 }
 
 int *calculateTime(double distances, int speed) {
@@ -163,6 +158,4 @@ int *calculateTime(double distances, int speed) {
     time[3] = rest;
 
     return time;
-=======
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 }
