@@ -108,5 +108,20 @@ void printTop()
 
 void printTable()
 {
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a);
+    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
+}
+void lavstruct(Stations *s)
+{
+    int i;
+    FILE *fp;
+    fp = fopen("Stationer.txt", "r");
+    /*sætter fil pointeren tilbage til starten af filen*/
+    rewind(fp);
+    for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
+    {
+        fscanf(fp, "%s %lf %lf\n",
+               s[i].Station,
+               &s[i].latitude,
+               &s[i].longitude);
+    }
