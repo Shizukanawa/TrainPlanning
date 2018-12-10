@@ -120,6 +120,7 @@ void printTop(Stations *s)
     {
         printf(" %-5.3s", s[i].StationName);
     }
+    printf("\n");
 }
 
 void printTable()
