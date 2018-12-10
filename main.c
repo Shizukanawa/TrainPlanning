@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
-#define a "Aal"
+#define a "05:50"
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
@@ -83,11 +83,11 @@ int main(void)
         IC4[i].Status = Off;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
-    printTop(s);
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
     printf("Printing table\n");
+    printTop(s);
     printTable();
     return EXIT_SUCCESS;
 }
@@ -110,17 +110,17 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Tog nr: %-5.3s", s[0].StationName);
+    printf("Station:       %-6.5s", s[0].StationName);
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
     {
-        printf(" %-5.3s", s[i].StationName);
+        printf(" %-6.5s", s[i].StationName);
     }
     printf("\n");
 }
 
 void printTable()
 {
-    printf("Tog nr: %-5d %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
 
 void getStations(Stations *s)
