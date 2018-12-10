@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
-#define a "station"
+#define a "Aal"
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
@@ -75,11 +75,7 @@ void printTable();
 
 int main(void)
 {
-
     Train IC4[AMOUNT_OF_TRAINS];
-    double distances[26] = {4.3, 4.8, 9.7, 7.5, 15.5, 31.3, 13.4, 22.5,
-                            32.6, 22.8, 31.4, 25.7, 10.2, 50.1, 14.0, 14.7,
-                            23.3, 15.4, 14.6, 14.4, 32.6, 11.8, 15.6, 3.9};
     int i, j = 0;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
@@ -91,10 +87,9 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-    j = 0;
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
-    /*printf("Printing table\n");
-    printTable();*/
+    printf("Printing table\n");
+    printTable();
     return EXIT_SUCCESS;
 }
 
@@ -120,7 +115,7 @@ void printTop()
 
 void printTable()
 {
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    printf("Tog nr: %-5d %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
 
 void getStations(Stations *s){
