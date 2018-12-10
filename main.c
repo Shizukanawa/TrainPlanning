@@ -87,7 +87,7 @@ int main(void)
         IC4[i].Status = Off;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
-
+    printTop(s);
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     j = 0;
@@ -115,10 +115,10 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Tog nr: %-5s", s[0].StationName);
-    for (i = 0; i < AMOUNT_OF_STATIONS; i++)
+    printf("Tog nr: %-5.3s", s[0].StationName);
+    for (i = 1; i < AMOUNT_OF_STATIONS; i++)
     {
-        printf(" %-5s", s[i].StationName);
+        printf(" %-5.3s", s[i].StationName);
     }
 }
 
