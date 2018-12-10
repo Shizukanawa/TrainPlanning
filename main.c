@@ -64,7 +64,7 @@ typedef struct Train
 } Train;
 
 Train changeStatus(Train train, int status);
-char *nameOfStation(int station);
+char *nameOfStation();
 void printTop();
 void printTable();
 
@@ -79,7 +79,7 @@ int main(void)
                             23.3, 15.4, 14.6, 14.4, 32.6, 11.8, 15.6, 3.9};
     int i;
 
-    for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
+    for(i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Status = Off;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
@@ -108,13 +108,28 @@ char *nameOfStation(int station)
     return station_array[station];
 }
 
-void printTop()
+void printTop(char *stations)
 {
+<<<<<<< HEAD
+=======
+    printf("Tog nr: %-5d %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", 5,
+    stations[0], stations[1], stations[2], stations[3],
+    stations[4], stations[5], stations[6], stations[7],
+    stations[8], stations[9], stations[10], stations[11],
+    stations[12], stations[13], stations[14], stations[15],
+    stations[16], stations[17], stations[18], stations[19],
+    stations[20], stations[21], stations[22], stations[23],
+    stations[24], stations[25], stations[26]);
+>>>>>>> 38bde283c0e19e9e48500c882f0b465f7bb29965
 }
 
 void printTable()
 {
+<<<<<<< HEAD
     printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+=======
+    printf("Tog nr: %-5d %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+>>>>>>> 38bde283c0e19e9e48500c882f0b465f7bb29965
 }
 
 void scanstations()
