@@ -5,10 +5,10 @@
 #define a "station"
 #define b "tog nr"
 #define c "tid"
+#define MAX_LGT 20
 
 const int AMOUNT_OF_STATIONS = 27;
 const int AMOUNT_OF_TRAINS = 10;
-const int MAX_LGT = 20;
 
 enum Station
 {
@@ -51,9 +51,9 @@ enum Status
 
 typedef struct Stations
 {
-    char Station;
-    double latitude;
-    double longitude;
+    char StationName[MAX_LGT];
+    double Latitude;
+    double Longitude;
 } Stations;
 
 typedef struct Train
@@ -65,7 +65,7 @@ typedef struct Train
 
 Train changeStatus(Train train, int status);
 char *nameOfStation(int station);
-void lavstruct(Stations *s);
+void getStations(Stations *s);
 void printTop();
 void printTable();
 
@@ -79,9 +79,9 @@ int main(void)
     double distances[26] = {4.3, 4.8, 9.7, 7.5, 15.5, 31.3, 13.4, 22.5,
                             32.6, 22.8, 31.4, 25.7, 10.2, 50.1, 14.0, 14.7,
                             23.3, 15.4, 14.6, 14.4, 32.6, 11.8, 15.6, 3.9};
-    int i;
+    int i, j = 0;
     Stations s[AMOUNT_OF_STATIONS];
-    lavstruct(s);
+    getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Status = Off;
@@ -90,9 +90,10 @@ int main(void)
 
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-
-    printf("Printing table\n");
-    printTable();
+    j = 0;
+    printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
+    /*printf("Printing table\n");
+    printTable();*/
     return EXIT_SUCCESS;
 }
 
@@ -120,18 +121,17 @@ void printTable()
     printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
 
-void lavstruct(Stations *s){
+void getStations(Stations *s){
     int i;
   FILE *fp;
-  fp = fopen("Stationer2.txt", "r");
-  /*sætter fil pointeren tilbage til starten af filen*/
-  rewind(fp);
+  fp = fopen("Stationer.txt", "r");
+  if (fp == NULL)
   for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
   {
     fscanf(fp, "%s %lf %lf\n",
-           s[i].Station,
-          &s[i].latitude,
-          &s[i].longitude);
+           s[i].StationName,
+          &s[i].Latitude,
+          &s[i].Longitude);
   }
   fclose(fp);
 }
