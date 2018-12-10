@@ -56,6 +56,7 @@ typedef struct Stations
     double longitude;
 } Stations;
 
+
 typedef struct Train
 {
     double Velocity;
@@ -123,7 +124,7 @@ void printTable()
 void lavstruct(Stations *s){
     int i;
   FILE *fp;
-  fp = fopen("Stationer2.txt", "r");
+  fp = fopen("Stationer.txt", "r");
   /*sætter fil pointeren tilbage til starten af filen*/
   rewind(fp);
   for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
