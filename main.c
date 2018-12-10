@@ -49,12 +49,12 @@ enum Status
     Down
 };
 
-typedef struct Station
+typedef struct Stations
 {
     char Station;
     double latitude;
     double longitude;
-} Station;
+} Stations;
 
 typedef struct Train
 {
@@ -120,19 +120,18 @@ void printTable()
     printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
 
-void lavstruct(Stations *s)
-{
+void lavstruct(Stations *s){
     int i;
-    FILE *fp;
-    fp = fopen("Stationer.txt", "r");
-    /*sætter fil pointeren tilbage til starten af filen*/
-    rewind(fp);
-    for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
-    {
-        fscanf(fp, "%s %lf %lf\n",
-               s[i].Station,
-               &s[i].latitude,
-               &s[i].longitude);
-    }
-    fclose(fp);
+  FILE *fp;
+  fp = fopen("Stationer2.txt", "r");
+  /*sætter fil pointeren tilbage til starten af filen*/
+  rewind(fp);
+  for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
+  {
+    fscanf(fp, "%s %lf %lf\n",
+           s[i].Station,
+          &s[i].latitude,
+          &s[i].longitude);
+  }
+  fclose(fp);
 }
