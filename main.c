@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
+<<<<<<< HEAD
 #define a "05:50"
+=======
+#define a "station"
+>>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
@@ -68,7 +72,10 @@ char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
+<<<<<<< HEAD
 int *calculateTime(double distances, int speed);
+=======
+>>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -76,6 +83,7 @@ int *calculateTime(double distances, int speed);
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
+    
     int i, j = 0;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
@@ -84,6 +92,7 @@ int main(void)
         IC4[i].Status = Off;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
+    printTop(s);
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
@@ -111,10 +120,14 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
+<<<<<<< HEAD
     printf("Station:       %-6.5s", s[0].StationName);
+=======
+    printf("Tog nr: %-5.3s", s[0].StationName);
+>>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
     {
-        printf(" %-6.5s", s[i].StationName);
+        printf(" %-5.3s", s[i].StationName);
     }
     printf("\n");
 }
