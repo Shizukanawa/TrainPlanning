@@ -49,6 +49,13 @@ enum Status
     Down
 };
 
+typedef struct Station
+{
+    char Station;
+    double latitude;
+    double longitude;
+} Station;
+
 typedef struct Train
 {
     double Velocity;
@@ -103,26 +110,30 @@ char *nameOfStation(int station)
 
 void printTop()
 {
-
 }
 
 void printTable()
 {
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a);
+    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
 }
-void lavstruct(Stations *s)
+
+void scanstations()
 {
     int i;
     FILE *fp;
-    fp = fopen("Stationer.txt", "r");
+    fp = fopen("stationer.txt", "r");
+    if (fp == NULL)
+    {
+        printf("Kunne ikke finde filen.\n");
+        return (EXIT_FAILURE);
+    }
     /*sætter fil pointeren tilbage til starten af filen*/
     rewind(fp);
     for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
     {
-        fscanf(fp, "%s %lf %lf\n",
-               s[i].Station,
-               &s[i].latitude,
-               &s[i].longitude);
+        fscanf(fp, " %s | %lf | &lf |",
+               Stations[i].Station,
+               Stations[i].latitude,
+               Stations[i].longitude);
     }
-    fclose(fp);
 }
