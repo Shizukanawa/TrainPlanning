@@ -113,11 +113,8 @@ void printTop(Stations *s)
 {
     int i;
     printf("Station:       %-6.5s", s[0].StationName);
-    printf("Tog nr: %-5.3s", s[0].StationName);
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
-    {
-        printf(" %-5.3s", s[i].StationName);
-    }
+        printf(" %-6.5s", s[i].StationName);
     printf("\n");
 }
 
