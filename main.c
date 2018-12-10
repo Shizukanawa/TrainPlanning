@@ -56,6 +56,7 @@ typedef struct Stations
     double Longitude;
 } Stations;
 
+
 typedef struct Train
 {
     double Velocity;
@@ -124,15 +125,19 @@ void printTable()
 
 void getStations(Stations *s){
     int i;
-  FILE *fp;
-  fp = fopen("Stationer.txt", "r");
-  if (fp == NULL)
-  for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
-  {
-    fscanf(fp, "%s %lf %lf\n",
-           s[i].StationName,
-          &s[i].Latitude,
-          &s[i].Longitude);
-  }
-  fclose(fp);
+    FILE *fp;
+    fp = fopen("Stationer.txt", "r");
+    if (fp == NULL)
+    printf("Stationer.txt not found\n");
+    else
+    {
+        for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
+        {
+        fscanf(fp, "%s %lf %lf\n",
+            s[i].StationName,
+            &s[i].Latitude,
+            &s[i].Longitude);
+        }
+        fclose(fp);
+    }
 }
