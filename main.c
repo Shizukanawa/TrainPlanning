@@ -114,6 +114,7 @@ char *nameOfStation(int station)
 
 void printTop()
 {
+    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n");
 }
 
 void printTable()
