@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
-<<<<<<< HEAD
 #define a "05:50"
-=======
-#define a "station"
->>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
@@ -80,8 +76,7 @@ int *calculateTime(double distances, int speed);
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
-    
-    int i, j = 0;
+    int i, j = 0, *speed;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
@@ -91,6 +86,7 @@ int main(void)
     }
     printTop(s);
     IC4[0] = changeStatus(IC4[0], Down);
+    speed = calculateTime(1000, 180);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
     printf("Printing table\n");
@@ -152,15 +148,16 @@ void getStations(Stations *s)
 
 int *calculateTime(double distances, int speed) {
     static int time[3];
-    int hours, rest;
+    double maxTime;
+    int hours = 0, rest = 0;
 
-    hours = ((int )distances / speed) * 60;
+    maxTime = (distances / speed) * 3600;
 
-    time[1] = hours / 3600;
-    rest = hours % 3600;
-    time[2] = rest / 60;
+    time[0] = (int)maxTime / 3600;
+    rest = (int)maxTime % 3600;
+    time[1] = rest / 60;
     rest = rest % 60;
-    time[3] = rest;
+    time[2] = rest;
 
     return time;
 }
