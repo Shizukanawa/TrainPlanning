@@ -65,7 +65,6 @@ void printTable();
 /* Point2: 57.008360, 9.898382 */
 
 int main(void)
-void lavstruct(Stations *s);
 {
     Train IC4[AMOUNT_OF_TRAINS];
     double distances[26] = {4.3, 4.8, 9.7, 7.5, 15.5, 31.3, 13.4, 22.5,
@@ -110,4 +109,20 @@ void printTop()
 void printTable()
 {
     printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a);
+}
+void lavstruct(Stations *s)
+{
+    int i;
+    FILE *fp;
+    fp = fopen("Stationer.txt", "r");
+    /*sætter fil pointeren tilbage til starten af filen*/
+    rewind(fp);
+    for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
+    {
+        fscanf(fp, "%s %lf %lf\n",
+               s[i].Station,
+               &s[i].latitude,
+               &s[i].longitude);
+    }
+    fclose(fp);
 }
