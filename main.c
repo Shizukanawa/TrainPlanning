@@ -72,10 +72,7 @@ char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
-<<<<<<< HEAD
 int *calculateTime(double distances, int speed);
-=======
->>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -120,11 +117,7 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-<<<<<<< HEAD
     printf("Station:       %-6.5s", s[0].StationName);
-=======
-    printf("Tog nr: %-5.3s", s[0].StationName);
->>>>>>> 1587fe6dc3cde230affa7255e31a445431d99d7a
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
     {
         printf(" %-5.3s", s[i].StationName);
