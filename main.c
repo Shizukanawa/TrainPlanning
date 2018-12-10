@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "calculations.h"
-<<<<<<< HEAD
-#define a "station"
-=======
 #define a "05:50"
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
@@ -72,10 +68,7 @@ char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
-<<<<<<< HEAD
 int *calculateTime(double distances, int speed);
-=======
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -93,17 +86,10 @@ int main(void)
     }
     IC4[0] = changeStatus(IC4[0], Down);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-<<<<<<< HEAD
-    j = 0;
-    printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
-    /*printf("Printing table\n");
-    printTable();*/
-=======
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
     printf("Printing table\n");
     printTop(s);
     printTable();
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
     return EXIT_SUCCESS;
 }
 
@@ -125,29 +111,17 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-<<<<<<< HEAD
-    printf("Tog nr: %-5s", s[0].StationName);
-    for (i = 0; i < AMOUNT_OF_STATIONS; i++)
-    {
-        printf(" %-5s", s[i].StationName);
-    }
-=======
     printf("Station:       %-6.5s", s[0].StationName);
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
     {
         printf(" %-6.5s", s[i].StationName);
     }
     printf("\n");
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 }
 
 void printTable()
 {
-<<<<<<< HEAD
-    printf("Tog nr: %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s %-5s\n", a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
-=======
     printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 }
 
 void getStations(Stations *s)
@@ -168,7 +142,6 @@ void getStations(Stations *s)
         }
         fclose(fp);
     }
-<<<<<<< HEAD
 }
 
 int *calculateTime(double distances, int speed) {
@@ -184,6 +157,4 @@ int *calculateTime(double distances, int speed) {
     time[3] = rest;
 
     return time;
-=======
->>>>>>> b554f8656f0f3f0259669aaeea8c14c3ffafaaf2
 }
