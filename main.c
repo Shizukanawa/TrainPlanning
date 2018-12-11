@@ -63,12 +63,12 @@ typedef struct Train
     int Stations;
 } Train;
 
-Train changeStatus(Train train, int status);
 char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
+void findRoute(Stations *s, int start, int end);
 
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
@@ -85,7 +85,7 @@ int main(void)
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     printTop(s);
-    IC4[0] = changeStatus(IC4[0], Down);
+    IC4[0].Status = Enroute;
     speed = calculateTime(1000, 180);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
@@ -93,12 +93,6 @@ int main(void)
     printTop(s);
     printTable();
     return EXIT_SUCCESS;
-}
-
-Train changeStatus(Train train, int status)
-{
-    train.Status = status;
-    return train;
 }
 
 char *nameOfStation(int station)
@@ -160,4 +154,9 @@ int *calculateTime(double distances, int speed) {
     time[2] = rest;
 
     return time;
+}
+
+void findRoute(Stations *s, int start, int end)
+{
+
 }
