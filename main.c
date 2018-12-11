@@ -68,8 +68,11 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
+<<<<<<< HEAD
 void findRoute(Stations *s, int start, int end);
 
+=======
+>>>>>>> d3a2196efc75f7484b8b154eebdb049dcf7cbb0b
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
 
@@ -109,9 +112,7 @@ void printTop(Stations *s)
     int i;
     printf("Station:       %-6.5s", s[0].StationName);
     for (i = 1; i < AMOUNT_OF_STATIONS; i++)
-    {
-        printf(" %-5.5s", s[i].StationName);
-    }
+        printf(" %-6.5s", s[i].StationName);
     printf("\n");
 }
 
