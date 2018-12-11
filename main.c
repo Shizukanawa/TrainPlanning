@@ -160,4 +160,8 @@ int *calculateTime(double distances, int speed) {
 void findRoute(Stations *s, int start, int end)
 {
 
+void findRoute(Stations *s, int start, int end)
+{
+
+}
 }
