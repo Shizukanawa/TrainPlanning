@@ -10,7 +10,7 @@
 const int AMOUNT_OF_STATIONS = 27;
 const int AMOUNT_OF_TRAINS = 10;
 
-enum Station
+typedef enum Station
 {
     Aalborg = 0,
     Skalborg,
@@ -39,7 +39,7 @@ enum Station
     Hoeje_Taastrup,
     Valby,
     Koebenhavn
-};
+} Station;
 
 enum Status
 {
@@ -68,11 +68,8 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
-<<<<<<< HEAD
 void findRoute(Stations *s, int start, int end);
 
-=======
->>>>>>> d3a2196efc75f7484b8b154eebdb049dcf7cbb0b
 /* Point1: 57.043243, 9.917183 */
 /* Point2: 57.008360, 9.898382 */
 
@@ -95,6 +92,7 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
+    findRoute(s, 0, 1);
     return EXIT_SUCCESS;
 }
 
@@ -130,7 +128,7 @@ void getStations(Stations *s)
         printf("Stationer.txt not found\n");
     else
     {
-        for (i = 0; i <= AMOUNT_OF_STATIONS; i++)
+        for (i = 0; i < AMOUNT_OF_STATIONS; i++)
         {
             fscanf(fp, "%s %lf %lf\n",
                    s[i].StationName,
@@ -141,7 +139,8 @@ void getStations(Stations *s)
     }
 }
 
-int *calculateTime(double distances, int speed) {
+int *calculateTime(double distances, int speed)
+{
     static int time[3];
     double maxTime;
     int hours = 0, rest = 0;
@@ -159,9 +158,8 @@ int *calculateTime(double distances, int speed) {
 
 void findRoute(Stations *s, int start, int end)
 {
-
-void findRoute(Stations *s, int start, int end)
-{
-
-}
+    double distance[AMOUNT_OF_STATIONS - 1], startenddistance = 0;
+    startenddistance = calculateDistance(s[Aalborg].Latitude, s[Aalborg].Longitude, s[Koebenhavn].Latitude, s[Koebenhavn].Longitude);
+    for (Station t = Aalborg; t < Koebenhavn; ++t)
+        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude);
 }
