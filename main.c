@@ -68,10 +68,7 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
-void findRoute(Stations *s, int start, int end);
-
-/* Point1: 57.043243, 9.917183 */
-/* Point2: 57.008360, 9.898382 */
+void findRoute(Stations *s, int start, int end)
 
 int main(void)
 {
@@ -145,7 +142,7 @@ int *calculateTime(double distances, int speed)
     double maxTime;
     int hours = 0, rest = 0;
 
-    maxTime = (distances / speed) * 3600;
+    maxTime = (distances / speed) * 3600; /* From hours to seconds */
 
     time[0] = (int)maxTime / 3600;
     rest = (int)maxTime % 3600;
@@ -161,7 +158,7 @@ void findRoute(Stations *s, int start, int end)
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
     for(t = Aalborg; t < Koebenhavn; t++)
-        straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude);
+        straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
     for (t = Aalborg; t < Koebenhavn; t++)
-        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude);
+        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 }
