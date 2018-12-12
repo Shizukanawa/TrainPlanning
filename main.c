@@ -92,7 +92,7 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    findRoute(s, 0, 1);
+    findRoute(s, Aalborg, Koebenhavn);
     return EXIT_SUCCESS;
 }
 
@@ -158,8 +158,10 @@ int *calculateTime(double distances, int speed)
 
 void findRoute(Stations *s, int start, int end)
 {
-    double distance[AMOUNT_OF_STATIONS - 1], startenddistance = 0;
-    startenddistance = calculateDistance(s[Aalborg].Latitude, s[Aalborg].Longitude, s[Koebenhavn].Latitude, s[Koebenhavn].Longitude);
-    for (Station t = Aalborg; t < Koebenhavn; ++t)
+    double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
+    Station t;
+    for(t = Aalborg; t < Koebenhavn; t++)
+        straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude);
+    for (t = Aalborg; t < Koebenhavn; t++)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude);
 }
