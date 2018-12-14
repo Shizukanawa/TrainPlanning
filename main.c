@@ -149,13 +149,13 @@ void getStations(Stations *s)
     }
 }
 
-int *calculateTime(double distances, int speed)
+int *calculateTime(double distances, int velocity)
 {
     static int time[3];
     double maxTime;
     int hours = 0, rest = 0;
 
-    maxTime = (distances / speed) * 3600; /* From hours to seconds */
+    maxTime = (distances / velocity) * 3600; /* From hours to seconds */
 
     time[0] = (int)maxTime / 3600;
     rest = (int)maxTime % 3600;
