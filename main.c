@@ -54,6 +54,7 @@ typedef struct Stations
     char StationName[MAX_LGT];
     double Latitude;
     double Longitude;
+    int Connections[3];
 } Stations;
 
 typedef struct Train
@@ -119,6 +120,7 @@ void printTable()
 void getStations(Stations *s)
 {
     int i;
+    char connections[10], *token, delim[2] = ",";
     FILE *fp;
     fp = fopen("Stationer.txt", "r");
     if (fp == NULL)
@@ -127,10 +129,17 @@ void getStations(Stations *s)
     {
         for (i = 0; i < AMOUNT_OF_STATIONS; i++)
         {
-            fscanf(fp, "%s %lf %lf\n",
+            fscanf(fp, "%s %lf %lf %s\n",
                    s[i].StationName,
                    &s[i].Latitude,
-                   &s[i].Longitude);
+                   &s[i].Longitude,
+                   connections);
+            token = strtok(connections, delim);
+            while(token != NULL)
+            {
+                printf(" %s\n", token);
+                token = (NULL, delim);
+            }
         }
         fclose(fp);
     }
