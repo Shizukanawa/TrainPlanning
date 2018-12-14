@@ -167,8 +167,9 @@ int *calculateTime(double distances, int speed)
 
 void findRoute(Stations *s, int start, int end)
 {
-    int i, j, k, l, m, n;
-    int Current_Connections[3];
+    int i, j, k, l, m, n, path = 0;
+    double shortest_path, complete_path = 0.0;
+    int Current_Connections[3], route_taken[AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
     for(t = Aalborg; t < Koebenhavn; t++)
@@ -176,20 +177,44 @@ void findRoute(Stations *s, int start, int end)
     for (t = Aalborg; t < Koebenhavn; t++)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
+    memset(&route_taken,'\0', sizeof(route_taken));
     start = j;
     while (j != end )
     {
-
-        while (s[j].Connections[i] != NULL)
+        memset(&Current_Connections,'\0', sizeof(Current_Connections));
+        
+        while (s[j].Connections[i] != NULL) /* Ser efter de connections stationen har, så længe det ikke er NULL */
         {
             s[j].Connections[i] = Current_Connections[i++];
         }
         
-        while(Current_Connections)
-            l = straightdistance[k] + distance[k];
-            m = straightdistance[k] + distance[k];
-            n = Current_Connections[k] + distance[k];
-
-        
+        i = 0;
+        l = infinite;
+        m = infinite;
+        n = infinite;
+        while(Current_Connections[i] != NULL) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+        {
+            k = Current_Connections[i++];
+            if (i = 0)
+                 l = straightdistance[k] + distance[k];
+            else if (i = 1)
+                m = straightdistance[k] + distance[k];
+            else if (i = 2)
+                n = Current_Connections[k] + distance[k];
+        }
+        shortest_path = 0;
+        for (i = 0; i < 3; i++) /* Ser efter hvilken af de connections er kortest*/
+        {
+            if (l != NULL && shortest_path > l)
+                shortest_path = l;
+            else if (m != NULL && shortest_path > m)
+                shortest_path = m;
+            else if (n != NULL && shortest_path > n)
+                shortest_path = n;
+        }
+        complete_path += shortest_path;/* Lægger længden af shortest_path oveni complete_path*/
+        route_taken[path] = j;   /*Ligger stationen med den korteste path ind i et array*/
+        j = ?;
+           
     }
 }
