@@ -178,13 +178,13 @@ void findRoute(Stations *s, int start, int end)
     for (t = Aalborg; t < Koebenhavn; t++)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
-    memset(&route_taken,'\0', sizeof(route_taken));
+    memset(&route_taken,infinite, sizeof(route_taken));
     start = j;
     while (j != end )
     {
-        memset(&Current_Connections,'\0', sizeof(Current_Connections));
+        memset(&Current_Connections,infinite, sizeof(Current_Connections));
         
-        while (s[j].Connections[i] != NULL) /* Ser efter de connections stationen har, så længe det ikke er NULL */
+        while (s[j].Connections[i] != infinite) /* Ser efter de connections stationen har, så længe det ikke er NULL */
         {
             s[j].Connections[i] = Current_Connections[i++];
         }
@@ -193,7 +193,7 @@ void findRoute(Stations *s, int start, int end)
         l = infinite;
         m = infinite;
         n = infinite;
-        while(Current_Connections[i] != NULL) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+        while(Current_Connections[i] != infinite) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
         {
             k = Current_Connections[i++];
             if (i = 0)
@@ -206,11 +206,11 @@ void findRoute(Stations *s, int start, int end)
         shortest_path = 0;
         for (i = 0; i < 3; i++)         /* Ser efter hvilken af de connections er kortest*/
         {
-            if (l != NULL && shortest_path > l)
+            if (l != infinite && shortest_path > l)
                 shortest_path = l;
-            else if (m != NULL && shortest_path > m)
+            else if (m != infinite && shortest_path > m)
                 shortest_path = m;
-            else if (n != NULL && shortest_path > n)
+            else if (n != infinite && shortest_path > n)
                 shortest_path = n;
         }
         complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
