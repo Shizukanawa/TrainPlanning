@@ -169,7 +169,6 @@ void findRoute(Stations *s, int start, int end)
 {
     int i, j, k, l, m, n;
     int Current_Connections[3];
-    int i, j;
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
     for(t = Aalborg; t < Koebenhavn; t++)
