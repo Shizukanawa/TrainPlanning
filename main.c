@@ -158,14 +158,11 @@ int *calculateTime(double distances, int speed)
 
 void findRoute(Stations *s, int start, int end)
 {
-    double distance[AMOUNT_OF_STATIONS - 1], startenddistance = 0;
-    startenddistance = calculateDistance(s[Aalborg].Latitude, s[Aalborg].Longitude, s[Koebenhavn].Latitude, s[Koebenhavn].Longitude);
-    for (Station t = Aalborg; t < Koebenhavn; ++t)
-        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude)
     double Matrix_edges[AMOUNT_OF_STATIONS][AMOUNT_OF_STATIONS];
     int i, j;
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
+
     for(t = Aalborg; t < Koebenhavn; t++)
         straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
     for (t = Aalborg; t < Koebenhavn; t++)
@@ -175,18 +172,19 @@ void findRoute(Stations *s, int start, int end)
     {
         for(j = 0; j < AMOUNT_OF_STATIONS; j++)
         {
-        Matrix_edges[i][j] = distance[t++]; 
+        Matrix_edges[i][j] = distance[t++];
         }
     }
     
-    for (i = 0; i < AMOUNT_OF_STATIONS; i++)
-            printf("%.1lf ", distance[i]);
+    /*for (i = 0; i < AMOUNT_OF_STATIONS; ++i)
+            printf("%.0lf ", distance[i]);
+    printf("\n");*/
         
-    for (i = 0; i < AMOUNT_OF_STATIONS; i++)
-    {
-        for(j = 0; j < AMOUNT_OF_STATIONS; j++)
+    for (i = 0; i < AMOUNT_OF_STATIONS; ++i)
+    {   printf("%d: ", i);
+        for(j = 0; j < AMOUNT_OF_STATIONS; ++j)
         {
-            printf("%.0lf ", Matrix_edges[i][j]);
+            printf("%.2lf ", Matrix_edges[i][j]);
         }
         printf("\n");
     }
