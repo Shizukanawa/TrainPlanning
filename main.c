@@ -7,6 +7,7 @@
 #define b "tog nr"
 #define c "tid"
 #define MAX_LGT 20
+#define infinite 9999
 
 const int AMOUNT_OF_STATIONS = 27;
 const int AMOUNT_OF_TRAINS = 10;
@@ -203,7 +204,7 @@ void findRoute(Stations *s, int start, int end)
                 n = Current_Connections[k] + distance[k];
         }
         shortest_path = 0;
-        for (i = 0; i < 3; i++) /* Ser efter hvilken af de connections er kortest*/
+        for (i = 0; i < 3; i++)         /* Ser efter hvilken af de connections er kortest*/
         {
             if (l != NULL && shortest_path > l)
                 shortest_path = l;
@@ -212,8 +213,8 @@ void findRoute(Stations *s, int start, int end)
             else if (n != NULL && shortest_path > n)
                 shortest_path = n;
         }
-        complete_path += shortest_path;/* Lægger længden af shortest_path oveni complete_path*/
-        route_taken[path] = j;   /*Ligger stationen med den korteste path ind i et array*/
+        complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
+        route_taken[path] = j;          /*Ligger stationen med den korteste path ind i et array*/
         j = ?;
            
     }
