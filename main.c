@@ -120,7 +120,7 @@ void printTable()
 
 void getStations(Stations *s)
 {
-    int i;
+    int i, j;
     char connections[10], *token, delim[2] = ",";
     FILE *fp;
     fp = fopen("Stationer.txt", "r");
@@ -130,16 +130,18 @@ void getStations(Stations *s)
     {
         for (i = 0; i < AMOUNT_OF_STATIONS; i++)
         {
-            fscanf(fp, "%s %lf %lf %s\n",
+            fscanf(fp, "%s %lf %lf %[0-9,]\n",
                    s[i].StationName,
                    &s[i].Latitude,
                    &s[i].Longitude,
                    connections);
             token = strtok(connections, delim);
+            j = 0;
             while(token != NULL)
             {
-                printf(" %s\n", token);
-                token = (NULL, delim);
+                s[i].Connections[j] = atoi(token);
+                token = strtok(NULL, delim);
+                ++j;
             }
         }
         fclose(fp);
