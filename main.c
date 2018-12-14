@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "calculations.h"
 #define a "05:50"
 #define b "tog nr"
