@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 
 double calculateRad(double degrees)
 {
@@ -15,6 +16,6 @@ double calculateDistance(double lat1, double long1, double lat2, double long2)
     a = sin(DeltaPhi/2) * sin(DeltaPhi/2) +
         cos(Phi1) * cos(Phi2) *
         sin(DeltaLambda/2) * sin(DeltaLambda/2);
-    c = 2 * atan2(sqrt(a), sqrt(1-a));
+    c = 2 * sin(fmin(1, sqrt(a)));
     return R * c/1000;
 }
