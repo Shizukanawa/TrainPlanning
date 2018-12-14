@@ -179,7 +179,7 @@ void findRoute(Stations *s, int start, int end)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
     memset(&route_taken,infinite, sizeof(route_taken));
-    start = j;
+    j = start;
     while (j != end )
     {
         memset(&Current_Connections,infinite, sizeof(Current_Connections));
