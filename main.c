@@ -9,8 +9,9 @@
 #define MAX_LGT 20
 #define infinite 9999
 
-const int AMOUNT_OF_STATIONS = 27;
-const int AMOUNT_OF_TRAINS = 10;
+#define AMOUNT_OF_STATIONS 27
+#define AMOUNT_OF_TRAINS 10
+#define MAX_AMOUNT_OF_STATIONS 99
 
 typedef enum Station
 {
@@ -71,12 +72,12 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
-void findRoute(Stations *s, int start, int end);
+void *findRoute(Stations *s, int start, int end);
 
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
-    int i, j = 0, *speed;
+    int i, j = 0, *speed, *ia;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
@@ -92,7 +93,9 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    findRoute(s, Aalborg, Koebenhavn);
+    ia = findRoute(s, Aalborg, Koebenhavn);
+    for(i = 0; ia[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(ia[i]));
     return EXIT_SUCCESS;
 }
 
@@ -141,7 +144,8 @@ void getStations(Stations *s)
             while(token != NULL)
             {
                 s[i].Connections[j] = atoi(token);
-                token = strtok(NULL, delim);
+                token = strtok(NULL, delim);    
+                printf("I: %d j: %d, connections: %d\n", i, j, s[i].Connections[j]);
                 ++j;
             }
         }
@@ -149,13 +153,13 @@ void getStations(Stations *s)
     }
 }
 
-int *calculateTime(double distances, int velocity)
+int *calculateTime(double distances, int speed)
 {
     static int time[3];
     double maxTime;
     int hours = 0, rest = 0;
 
-    maxTime = (distances / velocity) * 3600; /* From hours to seconds */
+    maxTime = (distances / speed) * 3600; /* From hours to seconds */
 
     time[0] = (int)maxTime / 3600;
     rest = (int)maxTime % 3600;
@@ -166,11 +170,12 @@ int *calculateTime(double distances, int velocity)
     return time;
 }
 
-void findRoute(Stations *s, int start, int end)
+void *findRoute(Stations *s, int start, int end)
 {
-    int i, j, k, l, m, n, path = 0;
-    double shortest_path, complete_path = 0.0;
-    int Current_Connections[3], route_taken[AMOUNT_OF_STATIONS];
+    int i = 0, j, k, o, path = 0;
+    double shortest_path, complete_path = 0.0, m, n, l;
+    int Current_Connections[3];
+    static int route_taken[MAX_AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
     for(t = Aalborg; t < Koebenhavn; t++)
@@ -178,30 +183,39 @@ void findRoute(Stations *s, int start, int end)
     for (t = Aalborg; t < Koebenhavn; t++)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
-    memset(&route_taken,infinite, sizeof(route_taken));
+    for(i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
+        route_taken[i] = infinite;
+    
     j = start;
-    while (j != end )
+    while (j != end)
     {
-        memset(&Current_Connections,infinite, sizeof(Current_Connections));
-        
-        while (s[j].Connections[i] != infinite) /* Ser efter de connections stationen har, så længe det ikke er NULL */
+        for(i = 0; i < 3; ++i)
+            Current_Connections[i] = infinite;
+        i = 0;
+        while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
         {
-            s[j].Connections[i] = Current_Connections[i++];
+            printf("Test: %d %d\n", i, s[j].Connections[i]);
+             Current_Connections[i] = s[j].Connections[i];
+             ++i;
         }
         
-        i = 0;
+        o = 0;
         l = infinite;
         m = infinite;
         n = infinite;
-        while(Current_Connections[i] != infinite) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+        for(i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
         {
-            k = Current_Connections[i++];
-            if (i = 0)
+            k = Current_Connections[i];
+            if (i == 0){
+                printf("%d %d %d \n", Current_Connections[0], Current_Connections[1], Current_Connections[2]);
                  l = straightdistance[k] + distance[k];
-            else if (i = 1)
+            }
+            else if (i == 1)
                 m = straightdistance[k] + distance[k];
-            else if (i = 2)
+            else if (i == 2)
                 n = Current_Connections[k] + distance[k];
+            o++;
+            
         }
         shortest_path = 0;
         for (i = 0; i < 3; i++)         /* Ser efter hvilken af de connections er kortest*/
@@ -214,8 +228,16 @@ void findRoute(Stations *s, int start, int end)
                 shortest_path = n;
         }
         complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
-        route_taken[path] = j;          /*Ligger stationen med den korteste path ind i et array*/
-        j = ?;
-           
+        printf("Shortest path: %lf", shortest_path);
+        route_taken[path++] = j;          /*Ligger stationen med den korteste path ind i et array*/
+        if (o == 1)
+            j = Current_Connections[o-1];
+        else if (o == 2)
+            j = Current_Connections[o-1];
+        else if (o == 3)
+            j = Current_Connections[o-1];
+        else printf("Error\n");
     }
+     route_taken[path++] = j; 
+     return route_taken;
 }
