@@ -189,10 +189,7 @@ void findRoute(Stations *s, int start, int end)
             l = straightdistance[k] + distance[k];
             m = straightdistance[k] + distance[k];
             n = Current_Connections[k] + distance[k];
-        
 
-        
-        
         
     }
 }
