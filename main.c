@@ -72,12 +72,13 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
-void *findRoute(Stations *s, int start, int end);
+void *findRoute(Stations *s, int start, int end, double *distanceTravelled);
 
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
     int i, j = 0, *speed, *ia;
+    double distanceTravelled;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
@@ -93,9 +94,10 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    ia = findRoute(s, Aalborg, Koebenhavn);
+    ia = findRoute(s, Aalborg, Koebenhavn, &distanceTravelled);
     for(i = 0; ia[i] != infinite; ++i)
         printf("Station name: %s\n", nameOfStation(ia[i]));
+    printf("Distance travelled: %lf\n", distanceTravelled);
     return EXIT_SUCCESS;
 }
 
@@ -170,7 +172,7 @@ int *calculateTime(double distances, int speed)
     return time;
 }
 
-void *findRoute(Stations *s, int start, int end)
+void *findRoute(Stations *s, int start, int end, double *distanceTravelled)
 {
     int i = 0, j, k, o, path = 0;
     double shortest_path, complete_path = 0.0, m, n, l;
@@ -178,18 +180,18 @@ void *findRoute(Stations *s, int start, int end)
     static int route_taken[MAX_AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
-    for(t = Aalborg; t < Koebenhavn; t++)
+    for (t = Aalborg; t < Koebenhavn; t++)
         straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
     for (t = Aalborg; t < Koebenhavn; t++)
         distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
-    for(i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
+    for (i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
         route_taken[i] = infinite;
     
     j = start;
     while (j != end)
     {
-        for(i = 0; i < 3; ++i)
+        for (i = 0; i < 3; ++i)
             Current_Connections[i] = infinite;
         i = 0;
         while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
@@ -203,7 +205,7 @@ void *findRoute(Stations *s, int start, int end)
         l = infinite;
         m = infinite;
         n = infinite;
-        for(i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+        for (i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
         {
             k = Current_Connections[i];
             if (i == 0){
@@ -217,18 +219,25 @@ void *findRoute(Stations *s, int start, int end)
             o++;
             
         }
+        printf("l: %lf, m: %lf, n: %lf\n", l, m ,n);
         shortest_path = 0;
-        for (i = 0; i < 3; i++)         /* Ser efter hvilken af de connections er kortest*/
+        if (l != infinite && l < m && l < n)
         {
-            if (l != infinite && shortest_path > l)
-                shortest_path = l;
-            else if (m != infinite && shortest_path > m)
-                shortest_path = m;
-            else if (n != infinite && shortest_path > n)
-                shortest_path = n;
+            printf("Test l\n");
+            shortest_path = l;
+        }
+        else if (m != infinite && m < l && m < n)
+        {
+            shortest_path = m;
+            printf("Test m\n");
+        }
+        else if (n != infinite && n < l && n < m)
+        {
+            shortest_path = n;
+            printf("Test n\n");
         }
         complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
-        printf("Shortest path: %lf", shortest_path);
+        printf("Shortest path: %lf\n", shortest_path);
         route_taken[path++] = j;          /*Ligger stationen med den korteste path ind i et array*/
         if (o == 1)
             j = Current_Connections[o-1];
@@ -238,6 +247,7 @@ void *findRoute(Stations *s, int start, int end)
             j = Current_Connections[o-1];
         else printf("Error\n");
     }
-     route_taken[path++] = j; 
+     route_taken[path++] = j;
+     *distanceTravelled = complete_path;
      return route_taken;
 }
