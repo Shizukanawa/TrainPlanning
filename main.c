@@ -176,7 +176,7 @@ void *findRoute(Stations *s, int start, int end, double *distanceTravelled)
 {
     int i = 0, j, k, o, path = 0;
     double shortest_path, complete_path = 0.0, m, n, l;
-    int Current_Connections[3];
+    int Current_Connections[3], closed_list[MAX_AMOUNT_OF_STATIONS];
     static int route_taken[MAX_AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
     Station t;
@@ -208,19 +208,15 @@ void *findRoute(Stations *s, int start, int end, double *distanceTravelled)
         for (i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
         {
             k = Current_Connections[i];
-            if (i == 0){
-                printf("%d %d %d \n", Current_Connections[0], Current_Connections[1], Current_Connections[2]);
-                 l = straightdistance[k] + distance[k];
-            }
+            if (i == 0)
+                l = straightdistance[k] + distance[k];
             else if (i == 1)
                 m = straightdistance[k] + distance[k];
             else if (i == 2)
                 n = Current_Connections[k] + distance[k];
             o++;
-            
         }
         printf("l: %lf, m: %lf, n: %lf\n", l, m ,n);
-        shortest_path = 0;
         if (l != infinite && l < m && l < n)
         {
             printf("Test l\n");
