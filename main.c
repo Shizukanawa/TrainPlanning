@@ -72,7 +72,7 @@ void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
 int *calculateTime(double distances, int speed);
-void *findRoute(Stations *s, int start, int end, double *distanceTravelled);
+void *findRoute(Stations *s, int start, int end);
 
 int main(void)
 {
@@ -94,10 +94,9 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    ia = findRoute(s, Aalborg, Koebenhavn, &distanceTravelled);
+    ia = findRoute(s, Koebenhavn, Aalborg);
     for(i = 0; ia[i] != infinite; ++i)
         printf("Station name: %s\n", nameOfStation(ia[i]));
-    printf("Distance travelled: %lf\n", distanceTravelled);
     return EXIT_SUCCESS;
 }
 
@@ -172,18 +171,30 @@ int *calculateTime(double distances, int speed)
     return time;
 }
 
-void *findRoute(Stations *s, int start, int end, double *distanceTravelled)
+void *findRoute(Stations *s, int start, int end)
 {
     int i = 0, j, k, o, path = 0;
     double shortest_path, complete_path = 0.0, m, n, l;
-    int Current_Connections[3], closed_list[MAX_AMOUNT_OF_STATIONS];
+    int Current_Connections[3];
     static int route_taken[MAX_AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS-1];
+    double max = 0.0;
     Station t;
-    for (t = Aalborg; t < Koebenhavn; t++)
-        straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
-    for (t = Aalborg; t < Koebenhavn; t++)
-        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
+    if (1)
+    {
+        for (t = Aalborg; t < Koebenhavn; t++)
+            straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
+        for (t = Aalborg; t < Koebenhavn; t++)
+            distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
+    }
+    else
+    {
+        for (t = Koebenhavn; t > Aalborg; t--)
+            straightdistance[i++] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
+        i = 0;
+        for (t = Koebenhavn; t > Aalborg; t--)
+            distance[i++] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t - 1].Latitude, s[t - 1].Longitude); /* Calculates distance between stations  */
+    }
 
     for (i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
         route_taken[i] = infinite;
@@ -191,59 +202,109 @@ void *findRoute(Stations *s, int start, int end, double *distanceTravelled)
     j = start;
     while (j != end)
     {
-        for (i = 0; i < 3; ++i)
-            Current_Connections[i] = infinite;
-        i = 0;
-        while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
+        if (start < end)
         {
-            printf("Test: %d %d\n", i, s[j].Connections[i]);
-             Current_Connections[i] = s[j].Connections[i];
-             ++i;
+            for (i = 0; i < 3; ++i)
+                Current_Connections[i] = infinite;
+            i = 0;
+            while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
+            {
+                printf("Test: %d %d\n", i, s[j].Connections[i]);
+                Current_Connections[i] = s[j].Connections[i];
+                ++i;
+            }
+
+            o = 0;
+            l = infinite;
+            m = infinite;
+            n = infinite;
+            for (i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+            {
+                k = Current_Connections[i];
+                if (i == 0)
+                    l = straightdistance[k] + distance[k];
+                else if (i == 1)
+                    m = straightdistance[k] + distance[k];
+                else if (i == 2)
+                    n = Current_Connections[k] + distance[k];
+                o++;
+            }
+            printf("l: %lf, m: %lf, n: %lf\n", l, m, n);
+            if (l != infinite && l < m && l < n)
+            {
+                printf("Test l\n");
+                shortest_path = l;
+            }
+            else if (m != infinite && m < l && m < n)
+            {
+                shortest_path = m;
+                printf("Test m\n");
+            }
+            else if (n != infinite && n < l && n < m)
+            {
+                shortest_path = n;
+                printf("Test n\n");
+            }
+            complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
+            printf("Shortest path: %lf\n", shortest_path);
+            route_taken[path++] = j; /*Ligger stationen med den korteste path ind i et array*/
+            if (o >= 1 && o <= 3)
+                j = Current_Connections[o - 1];
+            else
+                printf("Error\n");
         }
-        
-        o = 0;
-        l = infinite;
-        m = infinite;
-        n = infinite;
-        for (i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+        else
         {
-            k = Current_Connections[i];
-            if (i == 0)
-                l = straightdistance[k] + distance[k];
-            else if (i == 1)
-                m = straightdistance[k] + distance[k];
-            else if (i == 2)
-                n = Current_Connections[k] + distance[k];
-            o++;
+            for (i = 0; i < 3; ++i)
+                Current_Connections[i] = infinite;
+            i = 0;
+            while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
+            {
+                printf("Test: %d %d\n", i, s[j].Connections[i]);
+                Current_Connections[i] = s[j].Connections[i];
+                ++i;
+            }
+
+            o = 0;
+            l = infinite;
+            m = infinite;
+            n = infinite;
+            for (i = 0; Current_Connections[i] != infinite; i++) /* lægger længden af straightdistance og distance sammen på de stationer som er connected*/
+            {
+                k = Current_Connections[i];
+                if (i == 0)
+                    l = straightdistance[k] + distance[k];
+                else if (i == 1)
+                    m = straightdistance[k] + distance[k];
+                else if (i == 2)
+                    n = Current_Connections[k] + distance[k];
+                o++;
+            }
+            printf("l: %lf, m: %lf, n: %lf\n", l, m, n);
+            if (l != infinite && l < m && l < n)
+            {
+                printf("Test l\n");
+                shortest_path = l;
+            }
+            else if (m != infinite && m < l && m < n)
+            {
+                shortest_path = m;
+                printf("Test m\n");
+            }
+            else if (n != infinite && n < l && n < m)
+            {
+                shortest_path = n;
+                printf("Test n\n");
+            }
+            complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
+            printf("Shortest path: %lf\n", shortest_path);
+            route_taken[path++] = j; /*Ligger stationen med den korteste path ind i et array*/
+            if (o >= 1 && o <= 3)
+                j = Current_Connections[o - 1];
+            else
+                printf("Error\n");
         }
-        printf("l: %lf, m: %lf, n: %lf\n", l, m ,n);
-        if (l != infinite && l < m && l < n)
-        {
-            printf("Test l\n");
-            shortest_path = l;
-        }
-        else if (m != infinite && m < l && m < n)
-        {
-            shortest_path = m;
-            printf("Test m\n");
-        }
-        else if (n != infinite && n < l && n < m)
-        {
-            shortest_path = n;
-            printf("Test n\n");
-        }
-        complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
-        printf("Shortest path: %lf\n", shortest_path);
-        route_taken[path++] = j;          /*Ligger stationen med den korteste path ind i et array*/
-        if (o == 1)
-            j = Current_Connections[o-1];
-        else if (o == 2)
-            j = Current_Connections[o-1];
-        else if (o == 3)
-            j = Current_Connections[o-1];
-        else printf("Error\n");
     }
      route_taken[path++] = j;
-     *distanceTravelled = complete_path;
      return route_taken;
 }
