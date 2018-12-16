@@ -56,7 +56,7 @@ int isInRoute(int *routeTaken, int currentConnection);
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
-    int i, j = 0, *ia;
+    int i, j = 0, *route;
     double distances[AMOUNT_OF_STATIONS - 1];
     Stations s[AMOUNT_OF_STATIONS];
     Station t;
@@ -77,9 +77,10 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
-    for (i = 0; ia[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(ia[i]));
+    route = findRoute(s, distances, Koebenhavn, Aalborg);
+    
+    for (i = 0; route[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(route[i]));
     
     printf("Press ENTER to close...");
     getchar();
