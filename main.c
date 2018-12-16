@@ -77,10 +77,9 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    route = findRoute(s, distances, Koebenhavn, Aalborg);
-    
-    for (i = 0; route[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(route[i]));
+    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
+    /*for (i = 0; ia[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(ia[i]));*/
     
     printf("Press ENTER to close...");
     getchar();
@@ -107,7 +106,9 @@ void printTop(Stations *s)
 
 void printTable()
 {
-    printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    for(int TOGNR = 0; TOGNR <= 10; TOGNR++){
+        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    }
 }
 
 void getStations(Stations *s)
