@@ -229,30 +229,36 @@ void *findRoute(Stations *s, int start, int end)
                     m = straightdistance[k] + distance[k];
                 else if (i == 2)
                     n = Current_Connections[k] + distance[k];
-                o++;
             }
  
             printf("l: %lf, m: %lf, n: %lf\n", l, m, n);
-            if (l != infinite && l < m && l < n && !isInRoute(route_taken, Current_Connections[0]))
+            shortest_path = 0;
+            for(i = 0; i < 3; ++i)
             {
-                printf("Test l\n");
+            if (l != infinite && shortest_path < l && !isInRoute(route_taken, Current_Connections[0]))
+            {
+                printf("Station: %s \n", nameOfStation(Current_Connections[0]));
                 shortest_path = l;  
+                o = 0;
             }
-            else if (m != infinite && m < l && m < n && !isInRoute(route_taken, Current_Connections[1]))
+            else if (m != infinite && shortest_path < m && !isInRoute(route_taken, Current_Connections[1]))
             {
                 shortest_path = m;
-                printf("Test m\n");
+                printf("Station: %s \n", nameOfStation(Current_Connections[1]));
+                o = 1;
             }
-            else if (n != infinite && n < l && n < m && !isInRoute(route_taken, Current_Connections[2]))
+            else if (n != infinite && shortest_path < n && !isInRoute(route_taken, Current_Connections[2]))
             {
                 shortest_path = n;
-                printf("Test n\n");
+                printf("Station: %s \n", nameOfStation(Current_Connections[2]));
+                o = 2;
+            }
             }
             complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
             printf("Shortest path: %lf\n", shortest_path);
             route_taken[path++] = j; /*Ligger stationen med den korteste path ind i et array*/
-            if (o >= 0 && o <= 3)
-                j = Current_Connections[o-1];
+            if (o >= 0 && o < 3)
+                j = Current_Connections[o];
             else
                 printf("Error\n");
         }
@@ -282,32 +288,34 @@ void *findRoute(Stations *s, int start, int end)
                     m = straightdistance[k] + distance[k];
                 else if (i == 2)
                     n = Current_Connections[k] + distance[k];
-                o++;
             }
             printf("l: %lf, m: %lf, n: %lf\n", l, m, n);
-            if (l != infinite && l < m && l < n && !isInRoute(route_taken, Current_Connections[0]))
+            for(i = 0; i < 3; ++i)
             {
-                printf("Test l\n");
-                shortest_path = l;
-                
+            if (l != infinite && shortest_path < l && !isInRoute(route_taken, Current_Connections[0]))
+            {
+                printf("Station: %s \n", nameOfStation(Current_Connections[0]));
+                shortest_path = l;  
+                o = 0;
             }
-            else if (m != infinite && m < l && m < n && !isInRoute(route_taken, Current_Connections[1]))
+            else if (m != infinite && shortest_path < m && !isInRoute(route_taken, Current_Connections[1]))
             {
                 shortest_path = m;
-                printf("Test m\n");
-                
+                printf("Station: %s \n", nameOfStation(Current_Connections[1]));
+                o = 1;
             }
-            else if (n != infinite && n < l && n < m && !isInRoute(route_taken, Current_Connections[2]))
+            else if (n != infinite && shortest_path < n && !isInRoute(route_taken, Current_Connections[2]))
             {
                 shortest_path = n;
-                printf("Test n\n");
-                
+                printf("Station: %s \n", nameOfStation(Current_Connections[2]));
+                o = 2;
+            }
             }
             complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
             printf("Shortest path: %lf\n", shortest_path);
             route_taken[path++] = j; /*Ligger stationen med den korteste path ind i et array*/
-            if (o >= 1 && o <= 3)
-                j = Current_Connections[o - 1];
+            if (o >= 0 && o < 3)
+                j = Current_Connections[o];
             else
                 printf("Error\n");
         }
