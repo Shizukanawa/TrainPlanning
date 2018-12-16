@@ -72,14 +72,16 @@ char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable();
-void *findRoute(Stations *s, int start, int end);
+void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
     int i, j = 0, *ia;
+    double distances[AMOUNT_OF_STATIONS - 1];
     Stations s[AMOUNT_OF_STATIONS];
+    Station t;
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
@@ -87,12 +89,17 @@ int main(void)
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     IC4[0].Status = Enroute;
+
     calculateTime(1000, 180, IC4[0].Time);
+
+    for (t = Aalborg; t < Koebenhavn; t++)
+        distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
+
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
     printTable();
-    ia = findRoute(s, Koebenhavn, Aalborg); 
+    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
     for (i = 0; ia[i] != infinite; ++i)
         printf("Station name: %s\n", nameOfStation(ia[i]));
     
@@ -154,20 +161,18 @@ void getStations(Stations *s)
     }
 }
 
-void *findRoute(Stations *s, int start, int end)
+void *findRoute(Stations *s, double *distances, int start, int end)
 {
     int i = 0, j, k = 0, o, path = 0;
     double shortest_path, m, n, l;
     int Current_Connections[3];
     static int route_taken[MAX_AMOUNT_OF_STATIONS];
-    double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS - 1];
+    double straightdistance[AMOUNT_OF_STATIONS - 1];
     double max = 0.0;
     Station t;
 
     for (t = Aalborg; t < Koebenhavn; t++) /* From Aalborg to Copenhagen (enums) where t is less than Copenhagen */
         straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
-    for (t = Aalborg; t < Koebenhavn; t++)
-        distance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
     for (i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
         route_taken[i] = infinite;
@@ -193,11 +198,11 @@ void *findRoute(Stations *s, int start, int end)
         {
             k = Current_Connections[i];
             if (i == 0)
-                l = straightdistance[k] + distance[k];
+                l = straightdistance[k] + distances[k];
             else if (i == 1)
-                m = straightdistance[k] + distance[k];
+                m = straightdistance[k] + distances[k];
             else if (i == 2)
-                n = Current_Connections[k] + distance[k];
+                n = Current_Connections[k] + distances[k];
         }
 
         shortest_path = 0;
