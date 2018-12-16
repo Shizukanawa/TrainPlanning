@@ -79,7 +79,6 @@ int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
     int i, j = 0, *speed, *ia;
-    double distanceTravelled;
     Stations s[AMOUNT_OF_STATIONS];
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
