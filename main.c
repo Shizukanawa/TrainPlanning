@@ -56,7 +56,7 @@ int isInRoute(int *routeTaken, int currentConnection);
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
-    int i, j = 0, *route;
+    int i, j = 0, *ia;
     double distances[AMOUNT_OF_STATIONS - 1];
     Stations s[AMOUNT_OF_STATIONS];
     Station t;
@@ -77,10 +77,19 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    route = findRoute(s, distances, Koebenhavn, Aalborg);
+    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
+    //for (i = 0; ia[i] != infinite; ++i)
+      //  printf("Station name: %s\n", nameOfStation(ia[i]));
     
-    for (i = 0; route[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(route[i]));
+    
+    int Time_start[3];
+        Time_start[0] = 5;
+        Time_start[1] = 0;
+        Time_start[2] = 0;   
+    for(int i = 0; i<3; i++){
+        printf("\n current time: %i\n",Time_start[i]);
+    } 
+
     
     printf("Press ENTER to close...");
     getchar();
@@ -107,7 +116,11 @@ void printTop(Stations *s)
 
 void printTable()
 {
-    printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 1, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    
+    for(int TOGNR = 0; TOGNR <= 10; TOGNR++){
+        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
+        TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    }
 }
 
 void getStations(Stations *s)
