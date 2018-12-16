@@ -88,7 +88,6 @@ int main(void)
     }
     printTop(s);
     IC4[0].Status = Enroute;
-    speed = calculateTime(1000, 180);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
