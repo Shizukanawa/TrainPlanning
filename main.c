@@ -90,7 +90,6 @@ int main(void)
     IC4[0].Status = Enroute;
     speed = calculateTime(1000, 180);
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
-    printf("Name: %s, Lat: %lf, Lon: %lf\n", s[j].StationName, s[j].Latitude, s[j].Longitude);
     printf("Printing table\n");
     printTop(s);
     printTable();
@@ -173,7 +172,7 @@ int *calculateTime(double distances, int speed)
 void *findRoute(Stations *s, int start, int end)
 {
     int i = 0, j, k = 0, o, path = 0;
-    double shortest_path, complete_path = 0.0, m, n, l;
+    double shortest_path, m, n, l;
     int Current_Connections[3];
     static int route_taken[MAX_AMOUNT_OF_STATIONS];
     double distance[AMOUNT_OF_STATIONS - 1], straightdistance[AMOUNT_OF_STATIONS - 1];
@@ -196,8 +195,6 @@ void *findRoute(Stations *s, int start, int end)
         i = 0;
         while (s[j].Connections[i] != 99) /* Ser efter de connections stationen har, så længe det ikke er NULL */
         {
-
-            printf("Test: %d %d\n", i, s[j].Connections[i]);
             Current_Connections[i] = s[j].Connections[i];
             ++i;
         }
@@ -237,7 +234,6 @@ void *findRoute(Stations *s, int start, int end)
                 o = 2;
             }
         }
-        complete_path += shortest_path; /* Lægger længden af shortest_path oveni complete_path*/
         route_taken[path++] = j; /*Ligger stationen med den korteste path ind i et array*/
         if (o >= 0 && o < 3)
             j = Current_Connections[o];
