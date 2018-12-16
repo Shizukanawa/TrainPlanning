@@ -19,3 +19,16 @@ double calculateDistance(double lat1, double long1, double lat2, double long2)
     c = 2 * sin(fmin(1, sqrt(a)));
     return R * c/1000;
 }
+
+int calculateTime(double distances, int velocity, int *time)
+{
+    double maxTime;
+    int hours = 0, rest = 0;
+
+    maxTime = (distances / velocity) * 3600; /* From hours to seconds */
+
+    time[0] = (int)maxTime / 3600; /* Puts the amount of hours into seconds */
+    rest = (int)maxTime % 3600; /* Gets the rest and puts it into rest */
+    time[1] = rest / 60; /* Takes the rest divided by 60 to convert the rest of hours into minutes */
+    time[2] = rest % 60; /* Takes the of minutes and puts it into seconds */
+}
