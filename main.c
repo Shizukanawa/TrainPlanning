@@ -49,7 +49,7 @@ typedef struct Train
 char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
-void printTable(int *routeTaken, int *distances);
+void printTable(int *routeTaken, double *distances, Train *t);
 void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
@@ -64,6 +64,7 @@ int main(void)
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Status = Off;
+        IC4[i].Velocity = 180;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     IC4[0].Status = Enroute;
@@ -77,7 +78,7 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     route = findRoute(s, distances, Koebenhavn, Aalborg);
-    printTable(route, distances);
+    printTable(route, distances, IC4);
     
     for (i = 0; route[i] != infinite; ++i)
         printf("Station name: %s\n", nameOfStation(route[i]));
@@ -105,12 +106,12 @@ void printTop(Stations *s)
     printf("\n"); /* Goes to a newline at the end */
 }
 
-void printTable(int *routeTaken, int *distances)
+void printTable(int *routeTaken, double *distances, Train *t)
 {
-    Train t;
-    for(int TOGNR = 0; TOGNR <= AMOUNT_OF_TRAINS; TOGNR++){
+    for(int i = 0; i <= AMOUNT_OF_STATIONS; i++){
+        calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
         printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
-                 TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+                 i, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
     }
 }
 
