@@ -49,7 +49,7 @@ typedef struct Train
 char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
-void printTable();
+void printTable(int *routeTaken, int *distances);
 void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
@@ -76,10 +76,11 @@ int main(void)
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
-    printTable();
-    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
-    /*for (i = 0; ia[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(ia[i]));*/
+    route = findRoute(s, distances, Koebenhavn, Aalborg);
+    printTable(route, distances);
+    
+    for (i = 0; route[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(route[i]));
     
     printf("Press ENTER to close...");
     getchar();
@@ -104,10 +105,12 @@ void printTop(Stations *s)
     printf("\n"); /* Goes to a newline at the end */
 }
 
-void printTable()
+void printTable(int *routeTaken, int *distances)
 {
-    for(int TOGNR = 0; TOGNR <= 10; TOGNR++){
-        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    Train t;
+    for(int TOGNR = 0; TOGNR <= AMOUNT_OF_TRAINS; TOGNR++){
+        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
+                 TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
     }
 }
 
