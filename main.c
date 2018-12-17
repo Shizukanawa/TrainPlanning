@@ -109,15 +109,16 @@ void printTop(Stations *s)
 
 void printTable(int *routeTaken, double *distances, Train *IC4)
 {
-    int i, j, Time_start[3];
+
+    int i, j, Time_start[3], current_time[3];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
 
-    for(i = 0; i <= AMOUNT_OF_TRAINS; i++)
+    for(i = 0; i <= AMOUNT_OF_STATIONS; i++)
         calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
-
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
         printf("Tog nr: %-5d", i);
-        for(j= 0; j < AMOUNT_OF_STATIONS; ++j) {
+        for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
+            current_time[3];
             printf(" %-6s", a);
         }
         printf("\n");
