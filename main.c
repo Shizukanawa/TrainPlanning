@@ -77,9 +77,9 @@ int main(void)
     printf("Printing table\n");
     printTop(s);
     printTable();
-    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
-    /*for (i = 0; ia[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(ia[i]));*/
+    route = findRoute(s, distances, Koebenhavn, Aalborg); 
+    /*for (i = 0; route[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(route[i]));*/
     
     printf("Press ENTER to close...");
     getchar();
