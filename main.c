@@ -10,7 +10,7 @@
 #define infinite 9999
 
 #define AMOUNT_OF_STATIONS 27
-#define AMOUNT_OF_TRAINS 10
+#define AMOUNT_OF_TRAINS 27
 #define MAX_AMOUNT_OF_STATIONS 99
 
 typedef enum Station
@@ -77,11 +77,19 @@ int main(void)
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
+    
+    int Time_start[3];
+        Time_start[0] = 5;
+        Time_start[1] = 0;
+        Time_start[2] = 0;   
+    for(int i = 0; i<3; i++){
+        printf("\n current time: %i\n",Time_start[i]);
+    } 
     route = findRoute(s, distances, Koebenhavn, Aalborg);
     printTable(route, distances, IC4);
     
-    for (i = 0; route[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(route[i]));
+    /*for (i = 0; route[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(route[i]));*/
     
     printf("Press ENTER to close...");
     getchar();
@@ -108,11 +116,8 @@ void printTop(Stations *s)
 
 void printTable(int *routeTaken, double *distances, Train *t)
 {
-    int i;
-    for(i = 0; i <= AMOUNT_OF_TRAINS; i++){
-        calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
-    }
-    for(i = 0; i <= AMOUNT_OF_TRAINS; i++){
+    for(int i = 0; i <= AMOUNT_OF_STATIONS; i++){
+        calculateTime(distances[i], t[i].Velocity, t[i].Time);
         printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
                  i, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
     }
