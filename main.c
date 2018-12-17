@@ -77,14 +77,7 @@ int main(void)
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
-    
-    int Time_start[3];
-        Time_start[0] = 5;
-        Time_start[1] = 0;
-        Time_start[2] = 0;   
-    for(int i = 0; i<3; i++){
-        printf("\n current time: %i\n",Time_start[i]);
-    } 
+
     route = findRoute(s, distances, Koebenhavn, Aalborg);
     printTable(route, distances, IC4);
     
@@ -114,12 +107,20 @@ void printTop(Stations *s)
     printf("\n"); /* Goes to a newline at the end */
 }
 
-void printTable(int *routeTaken, double *distances, Train *t)
+void printTable(int *routeTaken, double *distances, Train *IC4)
 {
-    for(int i = 0; i <= AMOUNT_OF_STATIONS; i++){
-        calculateTime(distances[i], t[i].Velocity, t[i].Time);
-        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
-                 i, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    int i, j, Time_start[3];
+    Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
+
+    for(i = 0; i <= AMOUNT_OF_TRAINS; i++)
+        calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
+
+    for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
+        printf("Tog nr: %-5d", i);
+        for(j= 0; j < AMOUNT_OF_STATIONS; ++j) {
+            printf(" %-6s", a);
+        }
+        printf("\n");
     }
 }
 
