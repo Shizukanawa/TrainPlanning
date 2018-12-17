@@ -49,7 +49,7 @@ typedef struct Train
 char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
-void printTable();
+void printTable(int *routeTaken, double *distances, Train *t);
 void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
@@ -64,6 +64,7 @@ int main(void)
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Status = Off;
+        IC4[i].Velocity = 180;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     IC4[0].Status = Enroute;
@@ -76,8 +77,17 @@ int main(void)
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
-    printTable();
-    route = findRoute(s, distances, Koebenhavn, Aalborg); 
+    
+    int Time_start[3];
+        Time_start[0] = 5;
+        Time_start[1] = 0;
+        Time_start[2] = 0;   
+    for(int i = 0; i<3; i++){
+        printf("\n current time: %i\n",Time_start[i]);
+    } 
+    route = findRoute(s, distances, Koebenhavn, Aalborg);
+    printTable(route, distances, IC4);
+    
     /*for (i = 0; route[i] != infinite; ++i)
         printf("Station name: %s\n", nameOfStation(route[i]));*/
     
@@ -104,10 +114,12 @@ void printTop(Stations *s)
     printf("\n"); /* Goes to a newline at the end */
 }
 
-void printTable()
+void printTable(int *routeTaken, double *distances, Train *t)
 {
-    for(int TOGNR = 0; TOGNR <= 10; TOGNR++){
-        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+    for(int i = 0; i <= AMOUNT_OF_STATIONS; i++){
+        calculateTime(distances[i], t[i].Velocity, t[i].Time);
+        printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
+                 i, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
     }
 }
 
