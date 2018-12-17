@@ -10,7 +10,7 @@
 #define infinite 9999
 
 #define AMOUNT_OF_STATIONS 27
-#define AMOUNT_OF_TRAINS 10
+#define AMOUNT_OF_TRAINS 27
 #define MAX_AMOUNT_OF_STATIONS 99
 
 typedef enum Station
@@ -49,14 +49,14 @@ typedef struct Train
 char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
-void printTable();
+void printTable(int *routeTaken, double *distances, Train *t);
 void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
 int main(void)
 {
     Train IC4[AMOUNT_OF_TRAINS];
-    int i, j = 0, *ia;
+    int i, j = 0, *route;
     double distances[AMOUNT_OF_STATIONS - 1];
     Stations s[AMOUNT_OF_STATIONS];
     Station t;
@@ -64,6 +64,7 @@ int main(void)
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Status = Off;
+        IC4[i].Velocity = 180;
         printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
     }
     IC4[0].Status = Enroute;
@@ -76,11 +77,6 @@ int main(void)
     printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
-    printTable();
-    ia = findRoute(s, distances, Koebenhavn, Aalborg); 
-    //for (i = 0; ia[i] != infinite; ++i)
-      //  printf("Station name: %s\n", nameOfStation(ia[i]));
-    
     
     int Time_start[3];
         Time_start[0] = 5;
@@ -89,7 +85,11 @@ int main(void)
     for(int i = 0; i<3; i++){
         printf("\n current time: %i\n",Time_start[i]);
     } 
-
+    route = findRoute(s, distances, Koebenhavn, Aalborg);
+    printTable(route, distances, IC4);
+    
+    /*for (i = 0; route[i] != infinite; ++i)
+        printf("Station name: %s\n", nameOfStation(route[i]));*/
     
     printf("Press ENTER to close...");
     getchar();
@@ -114,12 +114,12 @@ void printTop(Stations *s)
     printf("\n"); /* Goes to a newline at the end */
 }
 
-void printTable()
+void printTable(int *routeTaken, double *distances, Train *t)
 {
-    
-    for(int TOGNR = 0; TOGNR <= 10; TOGNR++){
+    for(int i = 0; i <= AMOUNT_OF_STATIONS; i++){
+        calculateTime(distances[i], t[i].Velocity, t[i].Time);
         printf("Tog nr: %-6d %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s %-6s\n", 
-        TOGNR, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
+                 i, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a);
     }
 }
 
