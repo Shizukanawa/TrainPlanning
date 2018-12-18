@@ -113,18 +113,25 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
     Train IC[AMOUNT_OF_TRAINS];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
     IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
-    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
+    /*printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
     calculateTime(1000, 180, IC4[0].Time);
-    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
-    for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
+    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);*/
+   
+    /*for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
         calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
         
+    }*/
+    for(i = 1; i <=AMOUNT_OF_TRAINS;i++){
+        IC4[i].Time[0] = IC4[i-1].Time[0] + 1;
+        IC4[i].Time[1]=0;
+        IC4[i].Time[2]=0;
     }
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
         printf("Tog nr: %-5d", i);
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
            
-            printf(" %-6d:%d", a);
+            printf(" %d:%-5d", IC4[i].Time[0], IC4[i].Time[1]);
+            calculateTime(distances[j], 100, IC4[i].Time);
         }
         printf("\n");
     }
