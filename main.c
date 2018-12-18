@@ -211,20 +211,20 @@ void *findRoute(Stations *s, double *distances, int start, int end)
                 n = Current_Connections[k] + distances[k];
         }
 
-        shortest_path = 0;
+        shortest_path = infinite;
         for (i = 0; i < 3; ++i) /* Finds the shortest path */
         {
-            if (l != infinite && shortest_path < l && !isInRoute(route_taken, Current_Connections[0]))
+            if (l != infinite && shortest_path > l && !isInRoute(route_taken, Current_Connections[0]))
             {
                 shortest_path = l;
                 o = 0;
             }
-            else if (m != infinite && shortest_path < m && !isInRoute(route_taken, Current_Connections[1]))
+            else if (m != infinite && shortest_path > m && !isInRoute(route_taken, Current_Connections[1]))
             {
                 shortest_path = m;
                 o = 1;
             }
-            else if (n != infinite && shortest_path < n && !isInRoute(route_taken, Current_Connections[2]))
+            else if (n != infinite && shortest_path > n && !isInRoute(route_taken, Current_Connections[2]))
             {
                 shortest_path = n;
                 o = 2;
