@@ -127,10 +127,10 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
         IC4[i].Time[2]=0;
     }
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
-        printf("Tog nr: %-5d", i);
+        printf("Tog nr: %-3d", i);
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
            
-            printf(" %d:%-5d", IC4[i].Time[0], IC4[i].Time[1]);
+            printf(" %4d:%d", IC4[i].Time[0], IC4[i].Time[1]);
             calculateTime(distances[j], 100, IC4[i].Time);
         }
         printf("\n");
