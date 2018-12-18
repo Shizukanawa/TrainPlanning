@@ -41,7 +41,6 @@ typedef struct Stations
 typedef struct Train
 {
     double Velocity;
-    int Status;
     int Stations;
     int Time[3];
 } Train;
@@ -61,23 +60,14 @@ int main(void)
     Stations s[AMOUNT_OF_STATIONS];
     Station t;
     getStations(s);
-    for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
-    {
-        IC4[i].Status = Off;
-        IC4[i].Velocity = 180;
-        printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
-    }
-    IC4[0].Status = Enroute;
-
-    calculateTime(1000, 180, IC4[0].Time);
-
+    for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
+        IC4[i].Velocity = 100;
+    
     for (t = Aalborg; t < Koebenhavn; t++)
         distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
-
-    printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
+    
     printf("Printing table\n");
     printTop(s);
-
     route = findRoute(s, distances, Koebenhavn, Aalborg);
     printTable(route, distances, IC4);
     
@@ -101,7 +91,7 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Station:   %-5.5s", s[0].StationName); /* Prints out the first station */
+    printf("Station:    %-5.4s", s[0].StationName); /* Prints out the first station */
     for (i = 1; i < AMOUNT_OF_STATIONS; i++) /* Prints the rest out */
         printf("  %-5.4s", s[i].StationName);
     printf("\n"); /* Goes to a newline at the end */
@@ -113,14 +103,7 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
     Train IC[AMOUNT_OF_TRAINS];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
     IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
-    /*printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
-    calculateTime(1000, 180, IC4[0].Time);
-    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);*/
-   
-    /*for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
-        calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
-        
-    }*/
+
     for(i = 1; i <=AMOUNT_OF_TRAINS;i++){
         IC4[i].Time[0] = IC4[i-1].Time[0] + 1;
         IC4[i].Time[1]=0;
@@ -131,7 +114,7 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
            
             printf(" %3d:%.2d", IC4[i].Time[0], IC4[i].Time[1]);
-            calculateTime(distances[j], 100, IC4[i].Time);
+            calculateTime(distances[j], IC4[i].Velocity, IC4[i].Time);
         }
         printf("\n");
     }
