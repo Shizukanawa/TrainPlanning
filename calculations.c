@@ -27,8 +27,20 @@ int calculateTime(double distances, int velocity, int *time)
 
     maxTime = (distances / velocity) * 3600; /* From hours to seconds */
 
-    time[0] = (int)maxTime / 3600; /* Puts the amount of hours into seconds */
+    time[0] += (int)maxTime / 3600; /* Puts the amount of hours into seconds */
     rest = (int)maxTime % 3600; /* Gets the rest and puts it into rest */
-    time[1] = rest / 60; /* Takes the rest divided by 60 to convert the rest of hours into minutes */
-    time[2] = rest % 60; /* Takes the of minutes and puts it into seconds */
+    time[1] += rest / 60; /* Takes the rest divided by 60 to convert the rest of hours into minutes */
+    time[2] += rest % 60; /* Takes the of minutes and puts it into seconds */
+    if(time[2] >= 60)
+    {
+        time[1] += 1;
+        time[2] -= 60;
+    }
+    if(time[1] >= 60)
+    {
+        time[0] += 1;
+        time[1] -= 60;
+    }
+    if(time[0] >= 24)
+        time[0] -= 24;
 }
