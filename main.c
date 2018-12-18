@@ -101,9 +101,9 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Station:       %-6.5s", s[0].StationName); /* Prints out the first station */
+    printf("Station:   %-5.5s", s[0].StationName); /* Prints out the first station */
     for (i = 1; i < AMOUNT_OF_STATIONS; i++) /* Prints the rest out */
-        printf(" %-6.5s", s[i].StationName);
+        printf("  %-5.4s", s[i].StationName);
     printf("\n"); /* Goes to a newline at the end */
 }
 
@@ -127,10 +127,10 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
         IC4[i].Time[2]=0;
     }
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
-        printf("Tog nr: %-3d", i);
+        printf("Tog nr: %d", i);
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
            
-            printf(" %4d:%d", IC4[i].Time[0], IC4[i].Time[1]);
+            printf(" %3d:%.2d", IC4[i].Time[0], IC4[i].Time[1]);
             calculateTime(distances[j], 100, IC4[i].Time);
         }
         printf("\n");
