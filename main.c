@@ -3,9 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include "calculations.h"
-#define a "05:50"
-#define b "tog nr"
-#define c "tid"
+#include "convertstrings.h"
 #define MAX_LGT 20
 #define infinite 9999
 
@@ -41,8 +39,6 @@ typedef struct Stations
 typedef struct Train
 {
     double Velocity;
-    int Status;
-    int Stations;
     int Time[3];
 } Train;
 
@@ -50,6 +46,7 @@ char *nameOfStation(int station);
 void getStations(Stations *s);
 void printTop(Stations *s);
 void printTable(int *routeTaken, double *distances, Train *t);
+void getInputs(char *inputStart, char *inputEnd);
 void *findRoute(Stations *s, double *distances, int start, int end);
 int isInRoute(int *routeTaken, int currentConnection);
 
@@ -60,33 +57,41 @@ int main(void)
     double distances[AMOUNT_OF_STATIONS - 1];
     Stations s[AMOUNT_OF_STATIONS];
     Station t;
+    char inputStart[50], inputEnd[50];
+
     getStations(s);
     for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
     {
-        IC4[i].Status = Off;
-        IC4[i].Velocity = 180;
-        printf("IC4: %d, Status: %d\n", i, IC4[i].Status);
+        IC4[i].Velocity = 100;
     }
-    IC4[0].Status = Enroute;
-
-    calculateTime(1000, 180, IC4[0].Time);
 
     for (t = Aalborg; t < Koebenhavn; t++)
         distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
 
-    printf("IC4: %d, Status: %d\n", 0, IC4[0].Status);
     printf("Printing table\n");
     printTop(s);
 
-    route = findRoute(s, distances, Koebenhavn, Aalborg);
     printTable(route, distances, IC4);
-    
-    /*for (i = 0; route[i] != infinite; ++i)
-        printf("Station name: %s\n", nameOfStation(route[i]));*/
-    
-    printf("Press ENTER to close...");
-    getchar();
-    return EXIT_SUCCESS;
+
+    getInputs(inputStart, inputEnd);
+    if (nameToNumber(inputStart) == 99 || nameToNumber(inputEnd) == 99)
+    {
+        printf("Error reading station name(s).\n");
+        printf("Press ENTER to close...");
+        getchar();
+        return EXIT_FAILURE;
+    }
+    else
+    {
+        route = findRoute(s, distances, nameToNumber(inputStart), nameToNumber(inputEnd));
+        printf("Route:\n");
+        for (i = 0; route[i] != infinite; ++i)
+            printf("Station name: %s\n", nameOfStation(route[i]));
+
+        printf("Press ENTER to close...");
+        getchar();
+        return EXIT_SUCCESS;
+    }
 }
 
 char *nameOfStation(int station)
@@ -97,6 +102,7 @@ char *nameOfStation(int station)
                                     "Soroe", "Ringsted", "Roskilde", "Hoeje Taastrup", "Valby", "Koebenhavn"};
     return station_array[station]; /* Initializes array and returns it for a specific one */
 }
+
 
 void printTop(Stations *s)
 {
@@ -113,14 +119,7 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
     Train IC[AMOUNT_OF_TRAINS];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
     IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
-    /*printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
-    calculateTime(1000, 180, IC4[0].Time);
-    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);*/
-   
-    /*for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
-        calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
-        
-    }*/
+
     for(i = 1; i <=AMOUNT_OF_TRAINS;i++){
         IC4[i].Time[0] = IC4[i-1].Time[0] + 1;
         IC4[i].Time[1]=0;
@@ -135,6 +134,14 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
         }
         printf("\n");
     }
+}
+
+void getInputs(char *inputStart, char *inputEnd)
+{
+    printf("Enter starting destination: ");
+    gets(inputStart);
+    printf("Enter end destination: ");
+    gets(inputEnd);
 }
 
 void getStations(Stations *s)
