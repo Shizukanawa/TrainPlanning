@@ -101,25 +101,37 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Station:       %-6.5s", s[0].StationName); /* Prints out the first station */
+    printf("Station:   %-5.5s", s[0].StationName); /* Prints out the first station */
     for (i = 1; i < AMOUNT_OF_STATIONS; i++) /* Prints the rest out */
-        printf(" %-6.5s", s[i].StationName);
+        printf("  %-5.4s", s[i].StationName);
     printf("\n"); /* Goes to a newline at the end */
 }
 
 void printTable(int *routeTaken, double *distances, Train *IC4)
 {
-
-    int i, j, Time_start[3], current_time[3];
+    int i, j, Time_start[3];
+    Train IC[AMOUNT_OF_TRAINS];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
-
-    for(i = 0; i <= AMOUNT_OF_STATIONS; i++)
+    IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
+    /*printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
+    calculateTime(1000, 180, IC4[0].Time);
+    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);*/
+   
+    /*for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
         calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
+        
+    }*/
+    for(i = 1; i <=AMOUNT_OF_TRAINS;i++){
+        IC4[i].Time[0] = IC4[i-1].Time[0] + 1;
+        IC4[i].Time[1]=0;
+        IC4[i].Time[2]=0;
+    }
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
-        printf("Tog nr: %-5d", i);
+        printf("Tog nr: %d", i);
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
-            current_time[3];
-            printf(" %-6s", a);
+           
+            printf(" %3d:%.2d", IC4[i].Time[0], IC4[i].Time[1]);
+            calculateTime(distances[j], 100, IC4[i].Time);
         }
         printf("\n");
     }
@@ -199,20 +211,20 @@ void *findRoute(Stations *s, double *distances, int start, int end)
                 n = Current_Connections[k] + distances[k];
         }
 
-        shortest_path = 0;
+        shortest_path = infinite;
         for (i = 0; i < 3; ++i) /* Finds the shortest path */
         {
-            if (l != infinite && shortest_path < l && !isInRoute(route_taken, Current_Connections[0]))
+            if (l != infinite && shortest_path > l && !isInRoute(route_taken, Current_Connections[0]))
             {
                 shortest_path = l;
                 o = 0;
             }
-            else if (m != infinite && shortest_path < m && !isInRoute(route_taken, Current_Connections[1]))
+            else if (m != infinite && shortest_path > m && !isInRoute(route_taken, Current_Connections[1]))
             {
                 shortest_path = m;
                 o = 1;
             }
-            else if (n != infinite && shortest_path < n && !isInRoute(route_taken, Current_Connections[2]))
+            else if (n != infinite && shortest_path > n && !isInRoute(route_taken, Current_Connections[2]))
             {
                 shortest_path = n;
                 o = 2;
