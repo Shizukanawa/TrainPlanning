@@ -10,7 +10,7 @@
 #define infinite 9999
 
 #define AMOUNT_OF_STATIONS 27
-#define AMOUNT_OF_TRAINS 27
+#define AMOUNT_OF_TRAINS 10
 #define MAX_AMOUNT_OF_STATIONS 99
 
 typedef enum Station
@@ -109,17 +109,22 @@ void printTop(Stations *s)
 
 void printTable(int *routeTaken, double *distances, Train *IC4)
 {
-
-    int i, j, Time_start[3], current_time[3];
+    int i, j, Time_start[3];
+    Train IC[AMOUNT_OF_TRAINS];
     Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
-
-    for(i = 0; i <= AMOUNT_OF_STATIONS; i++)
+    IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
+    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
+    calculateTime(1000, 180, IC4[0].Time);
+    printf("Hours: %d, Minutes %d, Seconds: %d\n", IC4[0].Time[0], IC4[0].Time[1], IC4[0].Time[2]);
+    for(i = 0; i <= AMOUNT_OF_STATIONS; i++){
         calculateTime(distances[i], IC4[i].Velocity, IC4[i].Time);
+        
+    }
     for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
         printf("Tog nr: %-5d", i);
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
-            current_time[3];
-            printf(" %-6s", a);
+           
+            printf(" %-6d:%d", a);
         }
         printf("\n");
     }
