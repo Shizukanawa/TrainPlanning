@@ -20,14 +20,6 @@ typedef enum Station
     Hoeje_Taastrup, Valby, Koebenhavn
 } Station;
 
-enum Status
-{
-    Off,
-    Onstation,
-    Enroute,
-    Down
-};
-
 typedef struct Stations
 {
     char StationName[MAX_LGT];
