@@ -60,7 +60,7 @@ int main(void)
     char inputStart[50], inputEnd[50];
 
     getStations(s);
-    for (i = 0; i < AMOUNT_OF_TRAINS; ++i)
+    for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
     {
         IC4[i].Velocity = 100;
     }
@@ -107,7 +107,7 @@ char *nameOfStation(int station)
 void printTop(Stations *s)
 {
     int i;
-    printf("Station:   %-5.5s", s[0].StationName); /* Prints out the first station */
+    printf("Station:    %-5.4s", s[0].StationName); /* Prints out the first station */
     for (i = 1; i < AMOUNT_OF_STATIONS; i++) /* Prints the rest out */
         printf("  %-5.4s", s[i].StationName);
     printf("\n"); /* Goes to a newline at the end */
@@ -130,7 +130,7 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
         for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
            
             printf(" %3d:%.2d", IC4[i].Time[0], IC4[i].Time[1]);
-            calculateTime(distances[j], 100, IC4[i].Time);
+            calculateTime(distances[j], IC4[i].Velocity, IC4[i].Time);
         }
         printf("\n");
     }
