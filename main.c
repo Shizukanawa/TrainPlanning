@@ -13,11 +13,33 @@
 
 typedef enum Station
 {
-    Aalborg = 0, Skalborg, Svenstrup, Stoevring, Skoerping, 
-    Arden, Hobro, Randers, Langaa, Hadsten, Aarhus, Skanderborg,
-    Horsens, Vejle, Fredericia, Middelfart, Odense, Langeskov,
-    Nyborg, Korsoer, Slagelse, Soroe, Ringsted, Roskilde,
-    Hoeje_Taastrup, Valby, Koebenhavn
+    Aalborg = 0,
+    Skalborg,
+    Svenstrup,
+    Stoevring,
+    Skoerping,
+    Arden,
+    Hobro,
+    Randers,
+    Langaa,
+    Hadsten,
+    Aarhus,
+    Skanderborg,
+    Horsens,
+    Vejle,
+    Fredericia,
+    Middelfart,
+    Odense,
+    Langeskov,
+    Nyborg,
+    Korsoer,
+    Slagelse,
+    Soroe,
+    Ringsted,
+    Roskilde,
+    Hoeje_Taastrup,
+    Valby,
+    Koebenhavn
 } Station;
 
 typedef struct Stations
@@ -35,7 +57,7 @@ typedef struct Train
 } Train;
 
 char *nameOfStation(int station);
-void getStations(Stations *s);
+int getStations(Stations *s);
 void printTop(Stations *s);
 void printTable(int *routeTaken, double *distances, Train *t);
 void getInputs(char *inputStart, char *inputEnd);
@@ -51,40 +73,47 @@ int main(void)
     Station t;
     char inputStart[50], inputEnd[50];
 
-    getStations(s);
-    for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
+    if (getStations(s) == 0)
     {
-        IC4[i].Velocity = 100;
-    }
-
-    for (t = Aalborg; t < Koebenhavn; t++)
-        distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
-
-    printf("Printing table\n");
-    printTop(s);
-
-    printTable(route, distances, IC4);
-
-    getInputs(inputStart, inputEnd);
-    iStart = nameToNumber(inputStart);
-    iEnd = nameToNumber(inputEnd);
-    if (iStart == 99 || iEnd == 99)
-    {
-        printf("Error reading station name(s).\n");
-        printf("Press ENTER to close...");
-        getchar();
+        printf("Stationer.txt not found\n");
         return EXIT_FAILURE;
     }
     else
     {
-        route = findRoute(s, distances, iStart, iEnd);
-        printf("Route:\n");
-        for (i = 0; route[i] != infinite; ++i)
-            printf("Station name: %s\n", nameOfStation(route[i]));
+        for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
+        {
+            IC4[i].Velocity = 100;
+        }
 
-        printf("Press ENTER to close...");
-        getchar();
-        return EXIT_SUCCESS;
+        for (t = Aalborg; t < Koebenhavn; t++)
+            distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
+
+        printf("Printing table\n");
+        printTop(s);
+
+        printTable(route, distances, IC4);
+
+        getInputs(inputStart, inputEnd);
+        iStart = nameToNumber(inputStart);
+        iEnd = nameToNumber(inputEnd);
+        if (iStart == 99 || iEnd == 99)
+        {
+            printf("Error reading station name(s).\n");
+            printf("Press ENTER to close...");
+            getchar();
+            return EXIT_FAILURE;
+        }
+        else
+        {
+            route = findRoute(s, distances, iStart, iEnd);
+            printf("Route:\n");
+            for (i = 0; route[i] != infinite; ++i)
+                printf("Station name: %s\n", nameOfStation(route[i]));
+
+            printf("Press ENTER to close...");
+            getchar();
+            return EXIT_SUCCESS;
+        }
     }
 }
 
@@ -97,12 +126,11 @@ char *nameOfStation(int station)
     return station_array[station]; /* Initializes array and returns it for a specific one */
 }
 
-
 void printTop(Stations *s)
 {
     int i;
     printf("Station:    %-5.4s", s[0].StationName); /* Prints out the first station */
-    for (i = 1; i < AMOUNT_OF_STATIONS; i++) /* Prints the rest out */
+    for (i = 1; i < AMOUNT_OF_STATIONS; i++)        /* Prints the rest out */
         printf("  %-5.4s", s[i].StationName);
     printf("\n"); /* Goes to a newline at the end */
 }
@@ -111,18 +139,25 @@ void printTable(int *routeTaken, double *distances, Train *IC4)
 {
     int i, j, Time_start[3];
     Train IC[AMOUNT_OF_TRAINS];
-    Time_start[0] = 5; Time_start[1] = 0; Time_start[2] = 0;
-    IC4[0].Time[0]=Time_start[0]; IC4[0].Time[1]=Time_start[1];IC4[0].Time[2]=Time_start[2];
+    Time_start[0] = 5;
+    Time_start[1] = 0;
+    Time_start[2] = 0;
+    IC4[0].Time[0] = Time_start[0];
+    IC4[0].Time[1] = Time_start[1];
+    IC4[0].Time[2] = Time_start[2];
 
-    for(i = 1; i <=AMOUNT_OF_TRAINS;i++){
-        IC4[i].Time[0] = IC4[i-1].Time[0] + 1;
-        IC4[i].Time[1]=0;
-        IC4[i].Time[2]=0;
+    for (i = 1; i <= AMOUNT_OF_TRAINS; i++)
+    {
+        IC4[i].Time[0] = IC4[i - 1].Time[0] + 1;
+        IC4[i].Time[1] = 0;
+        IC4[i].Time[2] = 0;
     }
-    for(i = 0; i <= AMOUNT_OF_TRAINS; ++i) {
+    for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
+    {
         printf("Tog nr: %d", i);
-        for(j= 0; j < AMOUNT_OF_STATIONS; ++j){
-           
+        for (j = 0; j < AMOUNT_OF_STATIONS; ++j)
+        {
+
             printf(" %3d:%.2d", IC4[i].Time[0], IC4[i].Time[1]);
             calculateTime(distances[j], IC4[i].Velocity, IC4[i].Time);
         }
@@ -138,14 +173,14 @@ void getInputs(char *inputStart, char *inputEnd)
     gets(inputEnd);
 }
 
-void getStations(Stations *s)
+int getStations(Stations *s)
 {
     int i, j;
     char connections[10], *token, delim[2] = ",";
     FILE *fp;
     fp = fopen("Stationer.txt", "r"); /* Opens the file Stationer.txt in read mode */
-    if (fp == NULL) /* If there is  no content, print this out */
-        printf("Stationer.txt not found\n");
+    if (fp == NULL)                   /* If there is  no content, print this out */
+        return 0;
     else
     {
         for (i = 0; !feof(fp); i++) /* Runs until end of file */
@@ -165,6 +200,7 @@ void getStations(Stations *s)
             }
         }
         fclose(fp); /* Closes the file */
+        return 1;
     }
 }
 
@@ -178,7 +214,7 @@ void *findRoute(Stations *s, double *distances, int start, int end)
     double max = 0.0;
     Station t;
 
-    for (t = Aalborg; t < Koebenhavn; t++) /* From Aalborg to Copenhagen (enums) where t is less than Copenhagen */
+    for (t = Aalborg; t < Koebenhavn; t++)                                                                         /* From Aalborg to Copenhagen (enums) where t is less than Copenhagen */
         straightdistance[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[end].Latitude, s[end].Longitude); /* Calculates distance for every station to end station */
 
     for (i = 0; i < MAX_AMOUNT_OF_STATIONS; ++i)
