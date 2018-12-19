@@ -1,3 +1,11 @@
+/*
+Developed by:
+Andreas Leicht Madsen           <amad18@student.aau.dk>
+Anja Elisasen Lumholtz Nielsen  <aeln12@student.aau.dk>
+Kristian Helledie Eriksen       <kher18@student.aau.dk>
+Mathias Møller Søresen          <msa18@student.aau.dk>
+Trung Nhan Tran                 <ttran18@student.aau.dk>
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
