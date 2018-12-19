@@ -5,7 +5,7 @@ A University project for 1st semester about making software that prints a table 
 ## Running the software
 Download from the release at: https://github.com/Shizukanawa/TrainPlanning/releases/latest
 1. Run main.exe while having `Stationer.txt` in the same folder
-2. When asked for a start destination enter a station name starting with a capital letter
+2. When asked for a start destination enter a station name starting with a capital letter and the rest with lowercase letters
     1. With special letters like `æ` `ø` `å` please write `ae` `oe` `aa` respectively
 3. Enter an end destination with the same limitations
 4. Your route will now be displayed
