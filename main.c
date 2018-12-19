@@ -13,33 +13,11 @@
 
 typedef enum Station
 {
-    Aalborg = 0,
-    Skalborg,
-    Svenstrup,
-    Stoevring,
-    Skoerping,
-    Arden,
-    Hobro,
-    Randers,
-    Langaa,
-    Hadsten,
-    Aarhus,
-    Skanderborg,
-    Horsens,
-    Vejle,
-    Fredericia,
-    Middelfart,
-    Odense,
-    Langeskov,
-    Nyborg,
-    Korsoer,
-    Slagelse,
-    Soroe,
-    Ringsted,
-    Roskilde,
-    Hoeje_Taastrup,
-    Valby,
-    Koebenhavn
+    Aalborg = 0, Skalborg, Svenstrup, Stoevring, Skoerping,
+    Arden, Hobro, Randers, Langaa, Hadsten, Aarhus, Skanderborg,
+    Horsens, Vejle, Fredericia, Middelfart, Odense, Langeskov,
+    Nyborg, Korsoer, Slagelse, Soroe, Ringsted, Roskilde,
+    Hoeje_Taastrup, Valby, Koebenhavn
 } Station;
 
 typedef struct Stations
