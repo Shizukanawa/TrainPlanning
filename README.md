@@ -12,7 +12,7 @@ Download from the release at: https://github.com/Shizukanawa/TrainPlanning/relea
 
 ## Available stations
 | Station Name  | Corresponding number in software |
-| --------------| -- |
+| ------------- | -- |
 | Aalborg       | 0  |
 | Skalborg      | 1  |
 | Svenstrup     | 2  |
