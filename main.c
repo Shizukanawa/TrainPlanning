@@ -56,7 +56,6 @@ typedef struct Train
     int Time[3];
 } Train;
 
-char *nameOfStation(int station);
 int getStations(Stations *s);
 void printTop(Stations *s);
 void printTable(int *routeTaken, double *distances, Train *t);
@@ -106,22 +105,13 @@ int main(void)
             route = findRoute(s, distances, iStart, iEnd);
             printf("Route:\n");
             for (i = 0; route[i] != infinite; ++i)
-                printf("Station name: %s\n", nameOfStation(route[i]));
+                printf("Station name: %s\n", s[route[i]].StationName);
 
             printf("Press ENTER to close...");
             getchar();
             return EXIT_SUCCESS;
         }
     }
-}
-
-char *nameOfStation(int station)
-{
-    static char *station_array[] = {"Aalborg", "Skalborg", "Svenstrup", "Stoevring", "Skoerping", "Arden", "Hobro",
-                                    "Randers", "Langaa", "Hadsten", "Aarhus", "Skanderborg", "Horsens", "Vejle",
-                                    "Fredericia", "Middelfart", "Odense", "Langeskov", "Nyborg", "Korsoer", "Slagelse",
-                                    "Soroe", "Ringsted", "Roskilde", "Hoeje Taastrup", "Valby", "Koebenhavn"};
-    return station_array[station]; /* Initializes array and returns it for a specific one */
 }
 
 void printTop(Stations *s)
