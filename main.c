@@ -81,9 +81,7 @@ int main(void)
     else
     {
         for (i = 0; i <= AMOUNT_OF_TRAINS; ++i)
-        {
             IC4[i].Velocity = 100;
-        }
 
         for (t = Aalborg; t < Koebenhavn; t++)
             distances[t] = calculateDistance(s[t].Latitude, s[t].Longitude, s[t + 1].Latitude, s[t + 1].Longitude); /* Calculates distance between stations  */
