@@ -11,32 +11,34 @@ Download from the release at: https://github.com/Shizukanawa/TrainPlanning/relea
 4. Your route will now be displayed
 
 ## Available stations
-| Station Name  | Corresponding number in software |
-| ------------- | -- |
-| Aalborg       | 0  |
-| Skalborg      | 1  |
-| Svenstrup     | 2  |
-| Stoevring     | 3  |
-| Skoerping     | 4  |
-| Arden         | 5  |
-| Hobro         | 6  |
-| Randers       | 7  |
-| Langå         | 8  |
-| Hadsten       | 9  |
-| Århus         | 10 |
-| Skanderborg   | 11 |
-| Horsens       | 12 |
-| Vejle         | 13 |
-| Fredericia    | 14 |
-| Middelfart    | 15 |
-| Odense        | 16 |
-| Langeskov     | 17 |
-| Nyborg        | 18 |
-| Korsoer       | 19 |
-| Slagelse      | 20 |
-| Sorø          | 21 |
-| Ringsted      | 22 |
-| Roskilde      | 23 |
-| Høje Taastrup | 24 |
-| Valby         | 25 |
-| København     | 26 |
+| Station Name  | Corresponding number | Connections* |
+| ------------- | -- | -- |
+| Aalborg       | 0  | 1, 99, 99    |
+| Skalborg      | 1  | 0, 2, 99     |
+| Svenstrup     | 2  | 1, 3, 99     |
+| Stoevring     | 3  | 2, 4, 99     |
+| Skoerping     | 4  | 3, 5, 99     |
+| Arden         | 5  | 4, 6, 99     |
+| Hobro         | 6  | 5, 7, 99     |
+| Randers       | 7  | 6, 8, 99     |
+| Langå         | 8  | 7, 9, 99     |
+| Hadsten       | 9  | 8 ,10 ,99    |
+| Århus         | 10 | 9, 11, 99    |
+| Skanderborg   | 11 | 10, 12, 99   |
+| Horsens       | 12 | 11, 13, 99   |
+| Vejle         | 13 | 12, 14, 99   |
+| Fredericia    | 14 | 13, 15, 99   |
+| Middelfart    | 15 | 14, 16, 99   |
+| Odense        | 16 | 15, 17, 99   |
+| Langeskov     | 17 | 16, 18, 99   |
+| Nyborg        | 18 | 17, 19, 99   |
+| Korsoer       | 19 | 18, 20, 99   |
+| Slagelse      | 20 | 19, 21, 99   |
+| Sorø          | 21 | 20, 22, 99   |
+| Ringsted      | 22 | 21, 23, 99   |
+| Roskilde      | 23 | 22, 24, 99   |
+| Høje Taastrup | 24 | 23, 25, 99   |
+| Valby         | 25 | 24, 26, 99   |
+| København     | 26 | 25, 99, 99   |
+
+*99 is "NULL" in this case
